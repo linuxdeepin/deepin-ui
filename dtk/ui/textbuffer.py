@@ -94,7 +94,7 @@ class TextIter(gobject.GObject):
 
         if tempir.get_line() == tempir2.get_line():
             # in the same line
-            if tempir2.get_line_offset() < tempir.get_line_offset():
+            if tempir2.get_line_offset() <= tempir.get_line_offset():
                 return tempir2.__line_text[tempir2.get_line_offset():tempir.get_line_offset()]
         else:
             if tempir.get_line() < tempir2.get_line():
@@ -490,16 +490,17 @@ class TextBuffer(gobject.GObject):
             self.place_cursor(ir2)
 
     def reverse_backspace(self):
-        cursor_ir = self.get_iter_at_cursor()
-        line_max = len(cursor_ir.get_line_text()) if cursor_ir.get_line_text()[-1] != u"\n" else len(cursor_ir.get_line_text()) - 1
-        #TODO fix last char problem
-        if cursor_ir.get_line_offset() >= line_max:
-            # at line end
-            self.join_line(cursor_ir.get_line())
-        else:
+        if len(self.get_text()) > 0:
+            cursor_ir = self.get_iter_at_cursor()
+            line_max = len(cursor_ir.get_line_text()) if cursor_ir.get_line_text()[-1] != u"\n" else len(cursor_ir.get_line_text()) - 1
+            #TODO fix last char problem
             self.__set_iter_in_list_invalid(except_list = [cursor_ir, ])
-            start = self.get_iter_at_offset(cursor_ir.get_offset()+1)
-            self.do_delete_range(start, cursor_ir)
+            end = self.get_iter_at_offset(cursor_ir.get_offset()+1)
+            if len(self.get_text()) == 1:
+                # last char left
+                end.set_line_offset(1)
+            print "line_offset:%d" % end.get_line_offset()
+            self.do_delete_range(cursor_ir, end)
             self.place_cursor(cursor_ir)
 
     def backspace(self, ir):
@@ -545,15 +546,17 @@ class TextBuffer(gobject.GObject):
         self.__selection_end = (0, 0)
 
     def place_cursor(self, where):
-        line = where.get_line()
-        if line < self.get_line_count():
-            line_max = len(self.__text[line]) + 1 if self.__text[line][-1] != u"\n" else len(self.__text[line])
-            if where.get_line_offset() < line_max:
-                self.__cursor = (where.get_line_offset(), where.get_line())
-                return
-        
-        # other situation
-        self.__cursor = (0, 0)
+        try:
+            line = where.get_line()
+            if line < self.get_line_count():
+
+                line_max = len(self.__text[line]) + 1 if self.__text[line][-1] != u"\n" else len(self.__text[line])
+
+                if where.get_line_offset() < line_max:
+                    self.__cursor = (where.get_line_offset(), where.get_line())
+                    return
+        except:
+            pass
 
     def get_iter_at_cursor(self):
         line_offset, line = self.__cursor
