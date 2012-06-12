@@ -175,7 +175,7 @@ class TextView(gtk.EventBox):
         self.queue_draw()
     
     def press_return(self):
-        pass
+        self.__buffer.new_line_at_cursor()
         self.queue_draw()
     
     def motion_notify_text_view(self, widget, event):
