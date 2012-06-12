@@ -301,6 +301,10 @@ class TextIter(gobject.GObject):
     def set_invalid(self):
         """set textiter to invalid mode"""
         self.__is_valid = False
+    
+    def is_valid(self):
+        """test if textiter is in valid mode"""
+        return self.__is_valid
 
 gobject.type_register(TextIter)
 
@@ -387,6 +391,7 @@ class TextBuffer(gobject.GObject):
     def insert_text_at_cursor(self, text):
         ir = self.get_iter_at_cursor()
         self.insert_text(ir, text)
+        self.place_cursor(ir) # place new cursor
         self.__set_iter_in_list_invalid(some_iter = ir)
 
     def get_slice(self, start, end):
@@ -517,6 +522,24 @@ class TextBuffer(gobject.GObject):
 
         return ir
 
+    def copy_clipboard(self, clipboard):
+        if self.get_has_selection():
+            start, end = self.get_selection()
+            encoded = self.get_slice(start, end).encode("utf8")
+            clipboard.set_text(encoded)
+
+    def cut_clipboard(self, clipboard):
+        """cut current selection to clipboard"""
+        if self.get_has_selection():
+            self.copy_clipboard(clipboard)
+            self.delete_selection()
+
+    def __do_paste(self, clipboard, text, obj):
+        self.insert_text_at_cursor(text.decode("utf8"))
+
+    def paste_clipboard(self, clipboard):
+        """paster from clipboard to cursor"""
+        clipboard.request_text(self.__do_paste)
 
 gobject.type_register(TextBuffer)
 
