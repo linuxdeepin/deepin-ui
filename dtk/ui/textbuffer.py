@@ -94,7 +94,7 @@ class TextIter(gobject.GObject):
 
         if tempir.get_line() == tempir2.get_line():
             # in the same line
-            if tempir2.get_line_offset() < tempir.get_line_offset():
+            if tempir2.get_line_offset() <= tempir.get_line_offset():
                 return tempir2.__line_text[tempir2.get_line_offset():tempir.get_line_offset()]
         else:
             if tempir.get_line() < tempir2.get_line():
@@ -119,6 +119,9 @@ class TextIter(gobject.GObject):
             text += self.__text[x]
 
         return TextIter(text = text, text_buffer = self.__text_buffer, line_number = self.get_line(), line_offset = self.get_line_offset())
+
+    def __get_line_max(self, line):
+        return len(self.__text[line]) if self.__text[line][-1] != u"\n" else len(self.__text[line]) - 1
 
     def get_text(self, end):
         """TODO:what is the difference between this and get_slice()?"""
@@ -185,11 +188,12 @@ class TextIter(gobject.GObject):
 
     def forward_char(self):
         if not self.is_end():
-            if self.get_char() == "\n":
+            line_length = len(self.__line_text) - 1 if self.get_line_text()[-1] == u"\n" else len(self.__line_text)
+            if self.__line_offset == line_length:
                 # at line end, go to the next line
                 self.forward_line()
             else:
-                self.__line_offset += 1
+                self.set_line_offset(self.get_line_offset() + 1)
         else:
             # already at the end of iter
             pass
@@ -206,13 +210,11 @@ class TextIter(gobject.GObject):
             pass
 
     def forward_line(self):
-        if self.get_line() != len(self.__text.keys()):
+        if self.get_line() < len(self.__text.keys()):
             # not the last line
-            self.__line_offset = 0
-            self.__line_number += 1
-            self.__line_text = self.__text[self.get_line()] # get new line text
+            self.set_line(self.get_line() + 1)
         else:
-            self.__line_offset = len(self.__text[self.get_line()]) # move to end of last line
+            self.__line_offset = len(self.__line_text) - 1 # move to end of last line
 
     def backward_line(self):
         if self.get_line() != 0:
@@ -243,7 +245,7 @@ class TextIter(gobject.GObject):
         elif line < len(self.__text.keys()):
             self.__goto_line(line)
         else:
-            self.__goto_line(len(self.__text.keys() - 1)) # go to the last line
+            pass # last line or overflow, do nothing
 
     def __goto_line_offset(self, offset):
         self.__line_offset = offset
@@ -278,8 +280,11 @@ class TextIter(gobject.GObject):
         while not self.is_end():
             self.forward_char()
 
+    def backward_to_line_start(self):
+        self.__line_offset = 0
+
     def forward_to_line_end(self):
-        self.__line_offset = len(self.get_line_text())
+        self.__line_offset = self.__get_line_max(self.get_line())
 
     def in_range(self, start, end):
         """start and end must be in ascending order"""
@@ -301,14 +306,20 @@ class TextIter(gobject.GObject):
     def set_invalid(self):
         """set textiter to invalid mode"""
         self.__is_valid = False
+    
+    def is_valid(self):
+        """test if textiter is in valid mode"""
+        return self.__is_valid
 
 gobject.type_register(TextIter)
 
 class TextBuffer(gobject.GObject):
 
     __gsignals__ = {
-        'insert-text': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (TextIter, str)),
-        'delete-range': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (TextIter, TextIter)),
+        'insert-text' : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (TextIter, str, bool)),
+        'delete-range' : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (TextIter, TextIter)),
+        'changed' : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
+
     }
 
     def __init__(self, text = u""):
@@ -316,6 +327,9 @@ class TextBuffer(gobject.GObject):
         self.__text = parse_text(text)
         self.__text_iter_list = list() # setup a list for textiter storage
         self.__cursor = (0, 0) # (line_offset, line)
+        self.__selection_start = (0, 0)
+        self.__selection_end = (0, 0)
+        self.__is_selected = False
     
     def get_line_count(self):
         return len(self.__text.keys())
@@ -352,7 +366,7 @@ class TextBuffer(gobject.GObject):
             result += self.__text[x]
         return result
 
-    def do_insert_text(self, text_iter, text):
+    def do_insert_text(self, text_iter, text, new_line_only = False):
         """
         default handler fo insert-text
         we should do some real work inserting text here
@@ -360,41 +374,48 @@ class TextBuffer(gobject.GObject):
         """
         line = text_iter.get_line()
         line_offset = text_iter.get_line_offset()
+        offset = text_iter.get_offset()
         old_line_text = self.get_line_text(line)
-        new_text = self.get_text().replace(old_line_text, old_line_text[0:line_offset] + text + old_line_text[line_offset:len(old_line_text)])
+        old_text = self.get_text()
+        new_text = old_text[0:offset] + text + old_text[offset:len(old_text)] # caculate new text
         self.__text = parse_text(new_text) # insert and parse new self.__text
-        # set new text for the textiter
-        # new line will be automatically added in the set_text function, so only thing has to be done is providing the new line count
-        text_iter.set_new_text(self.get_text(), text.count(u"\n"))
-        # set new line offset, should be len(text.split("\n")[-1]) instead of len(text)
-        text_iter.set_line_offset(line_offset + len(text.split("\n")[-1]))
+        if new_line_only:
+            # set new text for the textiter
+            # new line will be automatically added in the set_text function, so only thing has to be done is providing the new line count
+            text_iter.set_new_text(self.get_text(), 1)
+            # set new line offset, should be len(text.split("\n")[-1]) instead of len(text)
+            text_iter.set_line_offset(0)
+        else:
+            text_iter.set_new_text(self.get_text(), text.count(u"\n"))
+            text_iter.set_line_offset(line_offset + len(text.split("\n")[-1]))
+
+    def new_line_at_cursor(self):
+        ir = self.get_iter_at_cursor()
+        self.do_insert_text(ir, u"\n", True)
+        self.place_cursor(ir)
 
     def get_iter_at_line(self, line):
         ir = TextIter(text = self.get_text(), line_number = line, line_offset = 0, text_buffer = self)
         self.__text_iter_list.append(ir) # add to textiter list
         return ir
 
-    def insert_text(self, text_iter, text):
+    def insert_text(self, text_iter, text, new_line_only = False):
         self.__set_iter_in_list_invalid(except_list = [text_iter,]) # set text iter invalid except this one because we can revalidate it by default
-        self.emit("insert-text", text_iter, text)
+        self.emit("insert-text", text_iter, text, new_line_only)
+        self.emit("changed")
 
-    def insert_text_at_cursor(self, text):
+    def insert_text_at_cursor(self, text, new_line_only = False):
         ir = self.get_iter_at_cursor()
-        self.insert_text(ir, text)
+        self.insert_text(ir, text, new_line_only)
+        self.place_cursor(ir) # place new cursor
         self.__set_iter_in_list_invalid(some_iter = ir)
-
-    def get_iter_at_cursor(self):
-        (line_offset, line) = self.__cursor
-        ir = TextIter(text = self.get_text(), line_number = line, line_offset = line_offset) # create new textiter
-        self.__text_iter_list.append(ir)
-        return ir
 
     def get_slice(self, start, end):
         return start.get_slice(end)
 
     def insert_range(self, text_iter, start, end):
         """copy text between start and end (the order of start and end doesn't matter) form TextBuffer and inserts the copy at iter"""
-        self.insert(text_iter, self.get_slice(start, end))
+        self.insert_text(text_iter, self.get_slice(start, end))
 
     def do_delete_range(self, start, end):
         """
@@ -438,6 +459,13 @@ class TextBuffer(gobject.GObject):
         self.emit("delete-range", start, end)
         self.__set_iter_in_list_invalid(except_list = [start,end])
 
+    def delete_selection(self):
+        if self.get_has_selection():
+            # selected
+            start, end = self.get_selection()
+            self.delete(start, end)
+            self.deselect() # deselect due to selection deleted
+
     def get_iter_at_offset(self, offset):
         line = 0
         # find the position
@@ -452,7 +480,28 @@ class TextBuffer(gobject.GObject):
         self.__text_iter_list.append(ir)
         return ir
 
+    def join_line(self, line):
+        """join the line with <line>"""
+        if line < self.get_line_count() - 1:
+            ir = self.get_iter_at_line(line + 1)
+            ir2 = self.get_iter_at_line(line)
+            ir2.forward_to_line_end()
+            self.do_delete_range(ir2, ir)
+            self.place_cursor(ir2)
 
+    def reverse_backspace(self):
+        if len(self.get_text()) > 0:
+            cursor_ir = self.get_iter_at_cursor()
+            line_max = len(cursor_ir.get_line_text()) if cursor_ir.get_line_text()[-1] != u"\n" else len(cursor_ir.get_line_text()) - 1
+            #TODO fix last char problem
+            self.__set_iter_in_list_invalid(except_list = [cursor_ir, ])
+            end = self.get_iter_at_offset(cursor_ir.get_offset()+1)
+            if len(self.get_text()) == 1:
+                # last char left
+                end.set_line_offset(1)
+            print "line_offset:%d" % end.get_line_offset()
+            self.do_delete_range(cursor_ir, end)
+            self.place_cursor(cursor_ir)
 
     def backspace(self, ir):
         if ir.get_offset() == 0:
@@ -462,7 +511,98 @@ class TextBuffer(gobject.GObject):
             self.__set_iter_in_list_invalid(except_list = [ir, ])
             start = self.get_iter_at_offset(ir.get_offset()-1)
             self.do_delete_range(start, ir)
+            self.place_cursor(ir)
 
+    def get_has_selection(self):
+        return self.__is_selected;
+
+    def select_text(self, start, end):
+        """select text from start to end"""
+        if start.get_offset() > end.get_offset():
+            up, down = end, start
+        else:
+            up, down = start, end
+
+        self.__selection_start = (up.get_line_offset(), up.get_line())
+        self.__selection_end = (down.get_line_offset(), down.get_line())
+        self.__is_selected = True
+
+    def get_selection(self):
+        """return a tuple of TextIter to represent the selection"""
+        start_x, start_y = self.__selection_start
+        end_x, end_y = self.__selection_end
+
+        start = self.get_iter_at_line(start_y)
+        end = self.get_iter_at_line(end_y)
+
+        start.set_line_offset(start_x)
+        end.set_line_offset(end_x)
+
+        return (start, end)
+
+    def deselect(self):
+        self.__is_selected = False
+        self.__selection_start = (0, 0)
+        self.__selection_end = (0, 0)
+
+    def place_cursor(self, where):
+        try:
+            line = where.get_line()
+            if line < self.get_line_count():
+
+                line_max = len(self.__text[line]) + 1 if self.__text[line][-1] != u"\n" else len(self.__text[line])
+
+                if where.get_line_offset() < line_max:
+                    self.__cursor = (where.get_line_offset(), where.get_line())
+                    return
+        except:
+            pass
+
+    def get_iter_at_cursor(self):
+        line_offset, line = self.__cursor
+        ir = self.get_iter_at_line(line)
+        ir.set_line_offset(line_offset)
+
+        return ir
+
+    def move_cursor_right(self):
+        ir = self.get_iter_at_cursor()
+        ir.forward_char()
+        self.place_cursor(ir)
+
+    def move_cursor_left(self):
+        ir = self.get_iter_at_cursor()
+        ir.backward_char()
+        self.place_cursor(ir)
+
+    def move_cursor_to_line_end(self):
+        ir = self.get_iter_at_cursor()
+        ir.forward_to_line_end()
+        self.place_cursor(ir)
+
+    def move_cursor_to_line_start(self):
+        ir = self.get_iter_at_cursor()
+        ir.backward_to_line_start()
+        self.place_cursor(ir)
+
+    def copy_clipboard(self, clipboard):
+        if self.get_has_selection():
+            start, end = self.get_selection()
+            encoded = self.get_slice(start, end).encode("utf8")
+            clipboard.set_text(encoded)
+
+    def cut_clipboard(self, clipboard):
+        """cut current selection to clipboard"""
+        if self.get_has_selection():
+            self.copy_clipboard(clipboard)
+            self.delete_selection()
+
+    def __do_paste(self, clipboard, text, obj):
+        self.insert_text_at_cursor(text)
+
+    def paste_clipboard(self, clipboard):
+        """paster from clipboard to cursor"""
+        clipboard.request_text(self.__do_paste)
 
 gobject.type_register(TextBuffer)
 

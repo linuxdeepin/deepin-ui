@@ -22,6 +22,7 @@
 
 import unittest
 import sys
+import gtk
 
 from common import srcDir
 
@@ -137,6 +138,48 @@ class TextBufferTest(unittest.TestCase):
         self.assertEqual(ir.get_line_offset(), 6) # should be at line end
         self.assertEqual(self.__buf.get_text(), u"开始testextiter\nline3\nline4") # join lines
         self.assertEqual(self.__buf.get_line_count(), 3) # one line less
+
+    def testSelection(self):
+        ir = self.__buf.get_iter_at_offset(0)
+        ir2 = self.__buf.get_iter_at_offset(8)
+        self.__buf.select_text(ir, ir2)
+
+        ir, ir2 = self.__buf.get_selection()
+
+        self.assertEqual(ir.get_offset(), 0)
+        self.assertEqual(ir2.get_offset(), 8)
+        self.assertEqual(ir2.get_char(), u"e")
+        self.assertEqual(self.__buf.get_has_selection(), True)
+
+        self.__buf.delete_selection()
+        self.assertEqual(self.__buf.get_has_selection(), False) # should deselect
+        self.assertEqual(self.__buf.get_line_count(), 3) # three lines left
+        self.assertEqual(self.__buf.get_text(), u"extiter\nline3\nline4")
+        self.assertEqual(ir.is_valid(), False) # should be invalid due to deletion
+
+    def testCursor(self):
+        ir = self.__buf.get_iter_at_offset(8)
+
+        self.__buf.place_cursor(ir)
+
+        ir = self.__buf.get_iter_at_cursor()
+
+        self.assertEqual(ir.get_offset(), 8)
+        self.assertEqual(ir.get_char(), u"e")
+
+    def testPasteAndCut(self):
+        ir = self.__buf.get_iter_at_offset(0)
+        ir2 = self.__buf.get_iter_at_offset(8)
+
+        self.__buf.select_text(ir, ir2)
+        self.__buf.place_cursor(ir)
+
+        clipboard = gtk.Clipboard()
+        self.__buf.cut_clipboard(clipboard)
+        self.__buf.paste_clipboard(clipboard)
+
+        self.assertEqual(self.__buf.get_text(), u"开始test\ntextiter\nline3\nline4")
+        self.assertEqual(self.__buf.get_iter_at_cursor().get_offset(), 8) # cursor should be moved
 
 
 if __name__ == "__main__":

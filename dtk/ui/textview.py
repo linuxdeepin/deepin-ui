@@ -29,11 +29,11 @@ from keymap import get_keyevent_name
 from menu import Menu
 from theme import ui_theme
 from utils import propagate_expose, cairo_state, color_hex_to_cairo, get_content_size, is_double_click, is_right_button, is_left_button, alpha_color_hex_to_cairo
+from textbuffer import TextBuffer, TextIter
 import gobject
 import gtk
 import pango
 import pangocairo
-
 
 class TextView(gtk.EventBox):
     
@@ -48,7 +48,7 @@ class TextView(gtk.EventBox):
                 background_select_color="#000000", ):
         gtk.EventBox.__init__(self)
         self.set_visible_window(False) # for transparent background
-        self.content = self.__parse_content(content)
+        self.__buffer = TextBuffer(content)
         self.padding_x = padding_x
         self.padding_y = padding_y
         self.line_spacing = line_spacing
@@ -58,14 +58,12 @@ class TextView(gtk.EventBox):
         self.background_select_color = background_select_color
         self.grab_focus_flag = False
         self.set_can_focus(True)
-        self.current_line = len(self.content.keys()) - 1 # currrent line index
-        self.current_line_offset = len(self.content[self.current_line]) # offset in current line
-        self.select_start = (0, 0)
-        self.select_end = (0, 0)
         self.drag_start_index = (0, 0)
         self.drag_end_index = (0, 0)
         self.offset_x = 0
         self.offset_y = 0
+        self.double_click_flag = False
+        self.left_click_flag = False
         
         self.im = gtk.IMMulticontext()
         self.im.connect("commit", lambda im, input_text: self.commit_entry(input_text))
@@ -91,109 +89,52 @@ class TextView(gtk.EventBox):
                 "Return" : self.press_return,
                 "PageDown" : self.press_page_down,
                 "PageUp" : self.press_page_up }
+        
+        self.__buffer.connect("changed", self.redraw)
 
         self.connect("key-press-event", self.key_press_textview)
         self.connect("expose-event", self.expose_textview)
         self.connect("focus-in-event", self.focus_in_textview)
         self.connect("focus-out-event", self.focus_out_textview)
         self.connect("button-press-event", self.button_press_textview)
+        self.connect("button-release-event", self.button_release_textview)
         self.connect("motion-notify-event", self.motion_notify_text_view)
-        
-    def __parse_content(self, text):
-        content = dict()
-        split = text.split("\n")
-        index = 0
-        for x in split:
-            content[index] = x.rstrip("\n")
-            index += 1
-        
-        return content
-        
+
+    def redraw(self, obj):
+        self.queue_draw()
+
     def move_to_left(self):
-        if self.current_line_offset >= 1:
-            self.current_line_offset -= len(self.get_utf8_string(self.content[self.current_line][0:self.current_line_offset], -1))
-            self.queue_draw()
-        else:
-            if self.current_line != 0:
-                self.current_line -= 1
-                self.current_line_offset = len(self.content[self.current_line])
-                self.queue_draw()
+        self.__buffer.move_cursor_left()
+        self.queue_draw()
         
     
     def move_to_right(self):
-        if self.current_line_offset != len(self.content[self.current_line]):
-            self.current_line_offset += len(self.get_utf8_string(self.content[self.current_line][self.current_line_offset:len(self.content[self.current_line])], 0)) # forward cursor
-            self.queue_draw()
-        else:
-            if self.current_line < len(self.content.keys()) - 1:
-                self.current_line += 1 # go to next line
-                self.current_line_offset = 0 # line start
-                self.queue_draw()
+        self.__buffer.move_cursor_right()
+        self.queue_draw()
         
     def move_up(self):
-        if self.current_line != 0:
-            self.current_line -= 1
-            offset = self.current_line_offset
-            if offset < len(self.content[self.current_line]):
-                #line is long enough, so keep current offset
-                pass
-            else:
-                #line is not long enouth, go to line end
-                self.current_line_offset = len(self.content[self.current_line])
-                
-            self.queue_draw()
-    
+        pass
+
     def move_down(self):
-        if self.current_line != len(self.content) - 1:
-            # not the last line
-            self.current_line += 1
-            offset = self.current_line_offset
-            if offset < len(self.content[self.current_line]):
-                #line is long enough, so keep current offset
-                pass
-            else:
-                #line is not long enouth, go to line end
-                self.current_line_offset = len(self.content[self.current_line])
-                
-            self.queue_draw()
-        
+        pass
+
     def move_to_start(self):
-        self.current_line_offset = 0
+        self.__buffer.move_cursor_to_line_start()
         self.queue_draw()
     
     def move_to_end(self):
-        self.current_line_offset = len(self.content[self.current_line])
+        self.__buffer.move_cursor_to_line_end()
         self.queue_draw()
     
     def backspace(self):
         """when press backspace, delete one char"""
-        if self.current_line_offset == 0:
-            # at line start
-            if self.current_line != 0:
-                # not the first line
-                char_left = len(self.content[self.current_line])
-                self.__join_line(self.current_line - 1)
-                self.current_line -= 1
-                self.current_line_offset = len(self.content[self.current_line]) - char_left
-        else:
-            delete_length = len(self.get_utf8_string(self.content[self.current_line][0:self.current_line_offset], -1))
-            self.__delete_text(self.current_line, self.current_line_offset, delete_length)
-            self.current_line_offset -= delete_length
-        
+        ir = self.__buffer.get_iter_at_cursor()
+        self.__buffer.backspace(ir)
         self.queue_draw()
-        
     
     def press_delete(self):
-        """when press backspace, delete one char"""
-        if self.current_line_offset == len(self.content[self.current_line]):
-            # offset at line end
-            if self.current_line != len(self.content.keys()) - 1:
-                # not the last line
-                self.__join_line(self.current_line)
-        else:
-            delete_length = len(self.get_utf8_string(self.content[self.current_line][self.current_line_offset:len(self.content[self.current_line])], 0))
-            self.__delete_text(self.current_line, self.current_line_offset + delete_length, delete_length)
-        
+        """when press delete, delete one char"""
+        self.__buffer.reverse_backspace()
         self.queue_draw()
         
     def press_page_down(self):
@@ -218,37 +159,28 @@ class TextView(gtk.EventBox):
         pass
     
     def cut_to_clipboard(self):
-        clipboard = gtk.Clipboard()
-        clipboard.set_text(self.get_text(-1))
-        self.set_text("")
-        pass
+        cb = gtk.Clipboard()
+        self.__buffer.cut_clipboard(cb)
+        self.queue_draw()
     
     def copy_to_clipboard(self):
-        clipboard = gtk.Clipboard()
-        clipboard.set_text(self.get_text(-1))
-        pass
+        cb = gtk.Clipboard()
+        self.__buffer.copy_clipboard(cb)
     
     def paste_from_clipboard(self):
-        clipboard = gtk.Clipboard()
-        clipboard.request_text(self.__read_clipboard)
-        pass
-    
-    def __read_clipboard(self, clipboard, text, data):
-        self.set_text(text)
+        cb = gtk.Clipboard()
+        self.__buffer.paste_clipboard(cb)
+        self.queue_draw()
     
     def press_return(self):
-        self.__insert_new_line(self.current_line, self.current_line_offset)
-        self.current_line += 1
-        self.current_line_offset = 0
-        
+        self.__buffer.new_line_at_cursor()
         self.queue_draw()
-        pass
     
     def motion_notify_text_view(self, widget, event):
         self.queue_draw()
         
     def button_press_textview(self, widget, event):
-        '''Button press entry.'''
+        '''Button press textview.'''
         # Get input focus.
         self.grab_focus()
         
@@ -257,9 +189,31 @@ class TextView(gtk.EventBox):
         if is_left_button(event):
             self.left_click_flag = True
             self.left_click_coordindate = (event.x, event.y)
-            print event.x, event.y
             
             self.drag_start_index = self.get_index_at_event(widget, event)
+
+    def button_release_textview(self, widget, event):
+        '''Button release textview.'''
+        if not self.double_click_flag:
+            self.drag_end_index = self.get_index_at_event(widget, event)    
+            start_line_offset, start_line = self.drag_start_index
+            end_line_offset, end_line = self.drag_end_index
+
+            ir = self.__buffer.get_iter_at_line(start_line)
+            ir2 = self.__buffer.get_iter_at_line(end_line)
+            ir.set_line_offset(start_line_offset)
+            ir2.set_line_offset(end_line_offset)
+
+            self.__buffer.select_text(ir, ir2)
+
+            ir, ir2 = self.__buffer.get_selection()
+
+            print self.__buffer.get_slice(ir, ir2)
+
+            self.queue_draw()
+
+        self.double_click_flag = False
+        self.left_click_flag = False
 
     def get_index_at_event(self, widget, event):
         '''Get index at event.'''
@@ -267,26 +221,22 @@ class TextView(gtk.EventBox):
         context = pangocairo.CairoContext(cr)
         layout = context.create_layout()
         layout.set_font_description(pango.FontDescription("%s %s" % (DEFAULT_FONT, self.font_size)))
-        layout.set_text(self.get_text(-1))
+        layout.set_text(self.__buffer.get_text())
         text_width = self.get_content_width("x")
         text_height = get_content_size("好Height", self.font_size)[-1]
         index_x = 0
         index_y = 0
         event.x -= self.padding_x
         event.y -= self.padding_y
-        for x in range(0, len(self.content.keys())):
+        for x in range(0, self.__buffer.get_line_count()):
             if text_height * x < event.y and event.y < text_height * (x + 1):
                 index_y = x
-                
-        if index_y == 0:
-            index_y = len(self.content.keys()) - 1
 
-        for x in range(0, len(self.content[index_y])):
-            if self.get_content_width(self.content[index_y][0:x]) < event.x and event.x < self.get_content_width(self.content[index_y][0:x+1]):
+        ir = self.__buffer.get_iter_at_line(index_y)
+
+        for x in range(0, ir.get_chars_in_line()):
+            if self.get_content_width(ir.get_line_text()[0:x]) < event.x and event.x < self.get_content_width(ir.get_line_text()[0:x+1]):
                 index_x = x
-        if index_x == 0:
-            # not in text area
-            index_x = len(self.content[index_y])
 
         return (index_x, index_y)
 
@@ -324,10 +274,10 @@ class TextView(gtk.EventBox):
 
         # resize widget for scrolledwindow-support
         max = 0
-        for x in self.content.keys():
-             if max < self.get_content_width(self.content[x]):
-                max = self.get_content_width(self.content[x])
-        height = get_content_size("好Height", self.font_size)[-1] * (self.current_line)
+        for x in range(0, self.__buffer.get_line_count()):
+             if max < self.get_content_width(self.__buffer.get_iter_at_line(x).get_line_text()):
+                max = self.get_content_width(self.__buffer.get_iter_at_line(x).get_line_text())
+        height = get_content_size("好Height", self.font_size)[-1] * (self.__buffer.get_iter_at_cursor().get_line())
         self.set_size_request(max + 10, height)
         
         return True
@@ -352,7 +302,7 @@ class TextView(gtk.EventBox):
             layout = context.create_layout()
             layout.set_font_description(pango.FontDescription("%s %s" % (DEFAULT_FONT, self.font_size)))
             
-            text = self.get_text(-1)
+            text = self.__buffer.get_text()
             layout.set_text(text)
             
             (text_width, text_height) = layout.get_pixel_size()
@@ -364,23 +314,26 @@ class TextView(gtk.EventBox):
             
 
     def __is_utf_8_text_in_line(self, line):
-        decode_list = list(self.content[line].decode('utf-8'))
+        decode_list = list(self.__buffer.get_iter_at_line(line).get_line_text().decode('utf-8'))
         for l in decode_list:
             if len(l.encode('utf-8')) != 1:
-                # utf-8 character length = 3
+                # utf-8 character length >= 1
                 return True
 
     def draw_cursor(self, cr, rect):
         x, y, w, h = rect.x, rect.y, rect.width, rect.height
-        left_str = self.get_text(self.current_line)[0:self.current_line_offset]
+        cursor_ir = self.__buffer.get_iter_at_cursor()
+        left_str = cursor_ir.get_line_text()[0:cursor_ir.get_line_offset()]
         left_str_width = self.get_content_width(left_str)
         
+        current_line = cursor_ir.get_line()
+
         line_offset = 0
         
         utf_8_height = get_content_size("好Height", self.font_size)[-1]
         no_utf_8_height = get_content_size("Height", self.font_size)[-1]
-        
-        for x in range(0, self.current_line):
+
+        for x in range(0, current_line):
             if self.__is_utf_8_text_in_line(x):
                 line_offset += utf_8_height
             else:
@@ -388,8 +341,9 @@ class TextView(gtk.EventBox):
 
         temp_line_offset = 1 # solve the offset problem while adding lines
         
+
         cr.set_source_rgb(0,0,0)
-        cr.rectangle(x + self.padding_x + left_str_width - temp_line_offset * self.current_line, y  + line_offset + utf_8_height - no_utf_8_height , 1, no_utf_8_height)
+        cr.rectangle(x + self.padding_x + left_str_width - temp_line_offset * current_line, y  + line_offset + utf_8_height - no_utf_8_height , 1, no_utf_8_height)
         cr.fill()
         
         
@@ -397,21 +351,8 @@ class TextView(gtk.EventBox):
         self.content = self.__parse_content(text)
         self.current_line = len(self.content.keys()) - 1 # currrent line index
         self.current_line_offset = len(self.content[self.current_line]) # offset in current line
-        print self.current_line
-        print self.current_line_offset
         self.queue_draw()
         
-    def get_text(self, line = 0):
-        if line != -1:
-            return self.content[line]
-        else:
-            result = ""
-            for x in self.content.keys():
-                result += self.content[x]
-                result += "\r"
-            result.rstrip("\r")
-            return result
-            
     def key_press_textview(self, widget, event):
         input_method_filt = self.im.filter_keypress(event)
         if not input_method_filt:
@@ -431,44 +372,8 @@ class TextView(gtk.EventBox):
         (content_width, content_height) = get_content_size(content, self.font_size)
         return content_width
     
-    def __insert_text(self, line, offset, text):
-        if line < len(self.content.keys()):
-            temp = self.content[line]
-            self.content[line] = temp[0:offset] + text + temp[offset:len(temp)]
-        else:
-            raise Exception()
-    
-    def __delete_text(self, line, offset, length):
-        if line < len(self.content.keys()) or (offset + length) > len(self.content[line]):
-            temp = self.content[line]
-            self.content[line] = temp[0:offset - length] + temp[offset:len(temp)]
-        else:
-            raise Exception()
-    
-    def __insert_new_line(self, after_line, line_offset):
-        temp = self.content.copy()
-        if after_line < len(self.content.keys()):
-            chars_left = self.content[after_line][line_offset:len(self.content[after_line])]
-            self.content[after_line] = self.content[after_line][0: line_offset]
-            for x in range(after_line + 1, len(self.content.keys())):
-                self.content[x+1] = temp[x]
-            self.content[after_line + 1] = chars_left
-        else:
-            raise Exception()
-            
-    def __join_line(self, after_line):
-        temp = self.content.copy()
-        if after_line < len(self.content.keys()):
-            self.content[after_line] += self.content[after_line + 1]
-            for x in range(after_line + 2, len(self.content.keys())):
-                self.content[x-1] = temp[x]
-            self.content.pop(len(self.content.keys()) - 1)
-        else:
-            raise Exception()
-    
     def commit_entry(self, input_text):
-        self.__insert_text(self.current_line, self.current_line_offset, input_text)
-        self.current_line_offset += len(input_text)
+        self.__buffer.insert_text_at_cursor(input_text)
         self.queue_draw()
         
     def get_utf8_string(self, content, index):
