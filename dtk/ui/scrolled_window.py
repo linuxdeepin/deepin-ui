@@ -343,9 +343,8 @@ class ScrolledWindow(gtk.Bin):
         self.child = None
         gtk.Bin.do_add(self, child)
 
-        child.set_vadjustment(self.vadjustment)
-        child.set_hadjustment(self.hadjustment)
-
+        child.set_scroll_adjustments(self.hadjustment, self.vadjustment)
+        
     def do_size_request(self, requsition):
         if self.child:
             #print "sel size_request", (requsition.width, requsition.height)
@@ -463,14 +462,6 @@ class ScrolledWindow(gtk.Bin):
         #raise Warning("dtk's scrolledwindow didn't support this function,\
         #        policy is always automatic!")
         return
-
-    def do_remove(self, child):
-        self.hadjustment = None
-        remove_callback_id(self._horizaontal.value_change_id)
-        self.vadjustment = None
-        remove_callback_id(self._vertical.value_change_id)
-        gtk.Bin.do_remove(self, child)
-
 
     def do_map(self):
         gtk.Bin.do_map(self)  #must before self.xwindow.show(), didn't know the reason.

@@ -46,7 +46,6 @@ skin_config.load_themes(ui_theme, app_theme)
 
 # Load other modules.
 from dtk.ui.application import Application
-from dtk.ui.browser_client import BrowserClient
 from dtk.ui.button import ImageButton
 from dtk.ui.categorybar import Categorybar
 from dtk.ui.constant import DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, WIDGET_POS_BOTTOM_LEFT
@@ -73,7 +72,12 @@ from dtk.ui.button import CheckButton, RadioButton
 from dtk.ui.combo import ComboBox, ComboBoxItem
 from dtk.ui.spin import SpinBox
 from dtk.ui.textview import TextView
+from dtk.ui.unique_service import UniqueService, is_exists
+from dtk.ui.newbrowser import WebView
+import sys
 import gtk
+import dbus
+import dbus.service
 import time
 
 def print_button_press(list_view, list_item, column, offset_x, offset_y):
@@ -123,8 +127,20 @@ def create_tab_window_item(name):
     return (name, align)
     
 if __name__ == "__main__":
+    # Build DBus name.
+    app_dbus_name = "com.deepin.demo"
+    app_object_name = "/com/deepin/demo"
+    
+    # Check unique.
+    if is_exists(app_dbus_name, app_object_name):
+        sys.exit()
+    
     # Init application.
-    application = Application("demo")
+    application = Application()
+    
+    # Startup unique service, must after application code.
+    app_bus_name = dbus.service.BusName(app_dbus_name, bus=dbus.SessionBus())
+    UniqueService(app_bus_name, app_dbus_name, app_object_name, application.raise_to_top)
     
     # Set application default size.
     application.set_default_size(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT)
@@ -337,7 +353,6 @@ if __name__ == "__main__":
     toggle_button_align.add(ToggleButtonGroup(toggle_button_items))
     entry_box.pack_start(ImageButtonGroup(image_button_items))
     entry_box.pack_start(toggle_button_align)
-
     
     # combobox
     combo_box = ComboBox(default_width=200) # args have (items=[], default_width=100)
@@ -360,14 +375,11 @@ if __name__ == "__main__":
     application.window.add_toggle_event(statusbar)
     
     horizontal_frame = HorizontalFrame()
-    browser_client = BrowserClient(
-        "http://www.linuxdeepin.com/forum",
-        "/home/andy/cookie.txt",
-        application.app_bus_name,
-        application.app_dbus_name,
-        )
-    horizontal_frame.add(browser_client)
-    tab_2_box.pack_start(horizontal_frame)
+    web_view = WebView()
+    web_scrolled_window = ScrolledWindow()
+    web_scrolled_window.add(web_view)
+    web_view.open("http://www.linuxdeepin.com")
+    tab_2_box.pack_start(web_scrolled_window)
     
     icon_view_hframe = HorizontalFrame()
     icon_view_vframe = gtk.Alignment()

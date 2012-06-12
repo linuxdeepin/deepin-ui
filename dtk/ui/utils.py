@@ -799,3 +799,13 @@ def is_hex_color(string):
                 return False
             else:
                 return True    
+
+def run_with_profile(func, sort='time', amount=20):  
+  import hotshot    
+  import hotshot.stats  
+  prof = hotshot.Profile("tmp_prof.txt", 1)    
+  prof.runcall(func)   
+  prof.close()    
+  print "----------------------parsing profile data---------------------"
+  p = hotshot.stats.load("tmp_prof.txt")   
+  p.sort_stats(sort).print_stats(amount)
