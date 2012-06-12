@@ -35,7 +35,6 @@ import gtk
 import pango
 import pangocairo
 
-
 class TextView(gtk.EventBox):
     
     def __init__(self, 
@@ -175,7 +174,7 @@ class TextView(gtk.EventBox):
         self.queue_draw()
     
     def press_return(self):
-        self.__buffer.new_line_at_cursor()
+        #self.__buffer.new_line_at_cursor()
         self.queue_draw()
     
     def motion_notify_text_view(self, widget, event):

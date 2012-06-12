@@ -480,11 +480,6 @@ class TextBuffer(gobject.GObject):
         ir2.forward_to_line_end()
         self.do_delete_range(ir2, ir)
 
-    def new_line_at_cursor(self):
-        old_line = self.get_iter_at_cursor().get_line()
-        self.insert_text_at_cursor(u"\n", new_line_only = True)
-        self.place_cursor(self.get_iter_at_line(old_line + 1))
-
     def backspace(self, ir):
         if ir.get_offset() == 0:
             # at buffer start, do nothing
