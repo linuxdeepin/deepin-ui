@@ -257,7 +257,6 @@ class TextIter(gobject.GObject):
     def set_line_offset(self, offset):
         """The character offset must be less than or equal to the number of characters in the line"""
         if offset < 0 or offset > len(self.get_line_text()):
-            print offset
             raise Exception()
         else:
             self.__goto_line_offset(offset)
@@ -392,7 +391,6 @@ class TextBuffer(gobject.GObject):
 
     def new_line_at_cursor(self):
         ir = self.get_iter_at_cursor()
-        print ir.get_line(), ir.get_line_offset()
         self.do_insert_text(ir, u"\n", True)
         self.place_cursor(ir)
 
@@ -484,10 +482,25 @@ class TextBuffer(gobject.GObject):
 
     def join_line(self, line):
         """join the line with <line>"""
-        ir = self.get_iter_at_line(line + 1)
-        ir2 = self.get_iter_at_line(line)
-        ir2.forward_to_line_end()
-        self.do_delete_range(ir2, ir)
+        if line < self.get_line_count() - 1:
+            ir = self.get_iter_at_line(line + 1)
+            ir2 = self.get_iter_at_line(line)
+            ir2.forward_to_line_end()
+            self.do_delete_range(ir2, ir)
+            self.place_cursor(ir2)
+
+    def reverse_backspace(self):
+        cursor_ir = self.get_iter_at_cursor()
+        line_max = len(cursor_ir.get_line_text()) if cursor_ir.get_line_text()[-1] != u"\n" else len(cursor_ir.get_line_text()) - 1
+        #TODO fix last char problem
+        if cursor_ir.get_line_offset() >= line_max:
+            # at line end
+            self.join_line(cursor_ir.get_line())
+        else:
+            self.__set_iter_in_list_invalid(except_list = [cursor_ir, ])
+            start = self.get_iter_at_offset(cursor_ir.get_offset()+1)
+            self.do_delete_range(start, cursor_ir)
+            self.place_cursor(cursor_ir)
 
     def backspace(self, ir):
         if ir.get_offset() == 0:

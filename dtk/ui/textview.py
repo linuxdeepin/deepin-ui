@@ -62,6 +62,8 @@ class TextView(gtk.EventBox):
         self.drag_end_index = (0, 0)
         self.offset_x = 0
         self.offset_y = 0
+        self.double_click_flag = False
+        self.left_click_flag = False
         
         self.im = gtk.IMMulticontext()
         self.im.connect("commit", lambda im, input_text: self.commit_entry(input_text))
@@ -95,6 +97,7 @@ class TextView(gtk.EventBox):
         self.connect("focus-in-event", self.focus_in_textview)
         self.connect("focus-out-event", self.focus_out_textview)
         self.connect("button-press-event", self.button_press_textview)
+        self.connect("button-release-event", self.button_release_textview)
         self.connect("motion-notify-event", self.motion_notify_text_view)
 
     def redraw(self, obj):
@@ -128,19 +131,10 @@ class TextView(gtk.EventBox):
         ir = self.__buffer.get_iter_at_cursor()
         self.__buffer.backspace(ir)
         self.queue_draw()
-        
     
     def press_delete(self):
         """when press delete, delete one char"""
-        #if self.current_line_offset == len(self.content[self.current_line]):
-            # offset at line end
-        #    if self.current_line != len(self.content.keys()) - 1:
-        #        # not the last line
-        #        self.__join_line(self.current_line)
-        #else:
-        #    delete_length = len(self.get_utf8_string(self.content[self.current_line][self.current_line_offset:len(self.content[self.current_line])], 0))
-        #    self.__delete_text(self.current_line, self.current_line_offset + delete_length, delete_length)
-        
+        self.__buffer.reverse_backspace()
         self.queue_draw()
         
     def press_page_down(self):
@@ -186,7 +180,7 @@ class TextView(gtk.EventBox):
         self.queue_draw()
         
     def button_press_textview(self, widget, event):
-        '''Button press entry.'''
+        '''Button press textview.'''
         # Get input focus.
         self.grab_focus()
         
@@ -195,9 +189,31 @@ class TextView(gtk.EventBox):
         if is_left_button(event):
             self.left_click_flag = True
             self.left_click_coordindate = (event.x, event.y)
-            print event.x, event.y
             
             self.drag_start_index = self.get_index_at_event(widget, event)
+
+    def button_release_textview(self, widget, event):
+        '''Button release textview.'''
+        if not self.double_click_flag:
+            self.drag_end_index = self.get_index_at_event(widget, event)    
+            start_line_offset, start_line = self.drag_start_index
+            end_line_offset, end_line = self.drag_end_index
+
+            ir = self.__buffer.get_iter_at_line(start_line)
+            ir2 = self.__buffer.get_iter_at_line(end_line)
+            ir.set_line_offset(start_line_offset)
+            ir2.set_line_offset(end_line_offset)
+
+            self.__buffer.select_text(ir, ir2)
+
+            ir, ir2 = self.__buffer.get_selection()
+
+            print self.__buffer.get_slice(ir, ir2)
+
+            self.queue_draw()
+
+        self.double_click_flag = False
+        self.left_click_flag = False
 
     def get_index_at_event(self, widget, event):
         '''Get index at event.'''
@@ -215,18 +231,12 @@ class TextView(gtk.EventBox):
         for x in range(0, self.__buffer.get_line_count()):
             if text_height * x < event.y and event.y < text_height * (x + 1):
                 index_y = x
-                
-        if index_y == 0:
-            index_y = self.__buffer.get_line_count() - 1
 
         ir = self.__buffer.get_iter_at_line(index_y)
 
         for x in range(0, ir.get_chars_in_line()):
             if self.get_content_width(ir.get_line_text()[0:x]) < event.x and event.x < self.get_content_width(ir.get_line_text()[0:x+1]):
                 index_x = x
-        if index_x == 0:
-            # not in text area
-            index_x = ir.get_chars_in_line()
 
         return (index_x, index_y)
 
@@ -341,8 +351,6 @@ class TextView(gtk.EventBox):
         self.content = self.__parse_content(text)
         self.current_line = len(self.content.keys()) - 1 # currrent line index
         self.current_line_offset = len(self.content[self.current_line]) # offset in current line
-        print self.current_line
-        print self.current_line_offset
         self.queue_draw()
         
     def key_press_textview(self, widget, event):
