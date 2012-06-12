@@ -87,6 +87,8 @@ class TextView(gtk.EventBox):
                 "Return" : self.press_return,
                 "PageDown" : self.press_page_down,
                 "PageUp" : self.press_page_up }
+        
+        self.__buffer.connect("changed", self.redraw)
 
         self.connect("key-press-event", self.key_press_textview)
         self.connect("expose-event", self.expose_textview)
@@ -94,7 +96,10 @@ class TextView(gtk.EventBox):
         self.connect("focus-out-event", self.focus_out_textview)
         self.connect("button-press-event", self.button_press_textview)
         self.connect("motion-notify-event", self.motion_notify_text_view)
-        
+
+    def redraw(self, obj):
+        self.queue_draw()
+
     def move_to_left(self):
         self.__buffer.move_cursor_left()
         self.queue_draw()
@@ -160,21 +165,21 @@ class TextView(gtk.EventBox):
         pass
     
     def cut_to_clipboard(self):
-        cb = gtk.Clipboard(display=gtk.gdk.display_get_default(), selection="TextView")
+        cb = gtk.Clipboard()
         self.__buffer.cut_clipboard(cb)
         self.queue_draw()
     
     def copy_to_clipboard(self):
-        cb = gtk.Clipboard(display=gtk.gdk.display_get_default(), selection="TextView")
+        cb = gtk.Clipboard()
         self.__buffer.copy_clipboard(cb)
     
     def paste_from_clipboard(self):
-        cb = gtk.Clipboard(display=gtk.gdk.display_get_default(), selection="TextView")
+        cb = gtk.Clipboard()
         self.__buffer.paste_clipboard(cb)
         self.queue_draw()
     
     def press_return(self):
-        #self.__buffer.new_line_at_cursor()
+        self.__buffer.new_line_at_cursor()
         self.queue_draw()
     
     def motion_notify_text_view(self, widget, event):

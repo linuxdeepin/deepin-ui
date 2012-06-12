@@ -375,17 +375,26 @@ class TextBuffer(gobject.GObject):
         """
         line = text_iter.get_line()
         line_offset = text_iter.get_line_offset()
+        offset = text_iter.get_offset()
         old_line_text = self.get_line_text(line)
-        new_text = self.get_text().replace(old_line_text, old_line_text[0:line_offset] + text + old_line_text[line_offset:len(old_line_text)])
+        old_text = self.get_text()
+        new_text = old_text[0:offset] + text + old_text[offset:len(old_text)] # caculate new text
         self.__text = parse_text(new_text) # insert and parse new self.__text
-        # set new text for the textiter
-        # new line will be automatically added in the set_text function, so only thing has to be done is providing the new line count
-        text_iter.set_new_text(self.get_text(), text.count(u"\n"))
-        # set new line offset, should be len(text.split("\n")[-1]) instead of len(text)
         if new_line_only:
+            # set new text for the textiter
+            # new line will be automatically added in the set_text function, so only thing has to be done is providing the new line count
+            text_iter.set_new_text(self.get_text(), 1)
+            # set new line offset, should be len(text.split("\n")[-1]) instead of len(text)
             text_iter.set_line_offset(0)
         else:
+            text_iter.set_new_text(self.get_text(), text.count(u"\n"))
             text_iter.set_line_offset(line_offset + len(text.split("\n")[-1]))
+
+    def new_line_at_cursor(self):
+        ir = self.get_iter_at_cursor()
+        print ir.get_line(), ir.get_line_offset()
+        self.do_insert_text(ir, u"\n", True)
+        self.place_cursor(ir)
 
     def get_iter_at_line(self, line):
         ir = TextIter(text = self.get_text(), line_number = line, line_offset = 0, text_buffer = self)
@@ -573,7 +582,7 @@ class TextBuffer(gobject.GObject):
             self.delete_selection()
 
     def __do_paste(self, clipboard, text, obj):
-        self.insert_text_at_cursor(text.decode("utf8"))
+        self.insert_text_at_cursor(text)
 
     def paste_clipboard(self, clipboard):
         """paster from clipboard to cursor"""
