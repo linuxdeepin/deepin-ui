@@ -185,11 +185,12 @@ class TextIter(gobject.GObject):
 
     def forward_char(self):
         if not self.is_end():
-            if self.get_char() == "\n":
+            line_length = len(self.__line_text) - 1 if self.get_line_text()[-1] == u"\n" else len(self.__line_text)
+            if self.__line_offset == line_length:
                 # at line end, go to the next line
                 self.forward_line()
             else:
-                self.__line_offset += 1
+                self.set_line_offset(self.get_line_offset() + 1)
         else:
             # already at the end of iter
             pass
@@ -206,13 +207,11 @@ class TextIter(gobject.GObject):
             pass
 
     def forward_line(self):
-        if self.get_line() != len(self.__text.keys()):
+        if self.get_line() < len(self.__text.keys()):
             # not the last line
-            self.__line_offset = 0
-            self.__line_number += 1
-            self.__line_text = self.__text[self.get_line()] # get new line text
+            self.set_line(self.get_line() + 1)
         else:
-            self.__line_offset = len(self.__text[self.get_line()]) # move to end of last line
+            self.__line_offset = len(self.__line_text) - 1 # move to end of last line
 
     def backward_line(self):
         if self.get_line() != 0:
@@ -243,7 +242,7 @@ class TextIter(gobject.GObject):
         elif line < len(self.__text.keys()):
             self.__goto_line(line)
         else:
-            self.__goto_line(len(self.__text.keys() - 1)) # go to the last line
+            pass # last line or overflow, do nothing
 
     def __goto_line_offset(self, offset):
         self.__line_offset = offset
@@ -277,6 +276,9 @@ class TextIter(gobject.GObject):
     def forward_to_end(self):
         while not self.is_end():
             self.forward_char()
+
+    def backward_to_line_start(self):
+        self.__line_offset = 0
 
     def forward_to_line_end(self):
         self.__line_offset = len(self.get_line_text())
@@ -472,6 +474,7 @@ class TextBuffer(gobject.GObject):
             self.__set_iter_in_list_invalid(except_list = [ir, ])
             start = self.get_iter_at_offset(ir.get_offset()-1)
             self.do_delete_range(start, ir)
+            self.place_cursor(ir)
 
     def get_has_selection(self):
         return self.__is_selected;
@@ -506,8 +509,9 @@ class TextBuffer(gobject.GObject):
         self.__selection_end = (0, 0)
 
     def place_cursor(self, where):
-        if where.get_line() < self.get_line_count():
-            line_max = len(self.__text[where.get_line()])
+        line = where.get_line()
+        if line < self.get_line_count():
+            line_max = len(self.__text[line]) + 1 if self.__text[line][-1] != u"\n" else len(self.__text[line])
             if where.get_line_offset() < line_max:
                 self.__cursor = (where.get_line_offset(), where.get_line())
                 return
@@ -521,6 +525,26 @@ class TextBuffer(gobject.GObject):
         ir.set_line_offset(line_offset)
 
         return ir
+
+    def move_cursor_right(self):
+        ir = self.get_iter_at_cursor()
+        ir.forward_char()
+        self.place_cursor(ir)
+
+    def move_cursor_left(self):
+        ir = self.get_iter_at_cursor()
+        ir.backward_char()
+        self.place_cursor(ir)
+
+    def move_cursor_to_line_end(self):
+        ir = self.get_iter_at_cursor()
+        ir.forward_to_line_end()
+        self.place_cursor(ir)
+
+    def move_cursor_to_line_start(self):
+        ir = self.get_iter_at_cursor()
+        ir.backward_to_line_start()
+        self.place_cursor(ir)
 
     def copy_clipboard(self, clipboard):
         if self.get_has_selection():
