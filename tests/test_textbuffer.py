@@ -138,6 +138,28 @@ class TextBufferTest(unittest.TestCase):
         self.assertEqual(self.__buf.get_text(), u"开始testextiter\nline3\nline4") # join lines
         self.assertEqual(self.__buf.get_line_count(), 3) # one line less
 
+    def testSelection(self):
+        ir = self.__buf.get_iter_at_offset(0)
+        ir2 = self.__buf.get_iter_at_offset(8)
+        self.__buf.select_text(ir, ir2)
+
+        ir, ir2 = self.__buf.get_selection()
+
+        self.assertEqual(ir.get_offset(), 0)
+        self.assertEqual(ir2.get_offset(), 8)
+        self.assertEqual(ir2.get_char(), u"e")
+        self.assertEqual(self.__buf.get_has_selection(), True)
+
+    def testCursor(self):
+        ir = self.__buf.get_iter_at_offset(8)
+
+        self.__buf.place_cursor(ir)
+
+        ir = self.__buf.get_iter_at_cursor()
+
+        self.assertEqual(ir.get_offset(), 8)
+        self.assertEqual(ir.get_char(), u"e")
+
 
 if __name__ == "__main__":
     unittest.main()
