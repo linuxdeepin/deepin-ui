@@ -93,7 +93,7 @@ msgstr "選擇全部"
 
 #: ../ui/entry.py:1935
 msgid "Please input new shortcuts"
-msgstr "請鍵入新的快捷鍵"
+msgstr "請輸入新的捷徑鍵"
 
 #: ../ui/entry.py:1975
 msgid "Disabled"
@@ -101,7 +101,7 @@ msgstr "停用"
 
 #: ../ui/titlebar.py:143
 msgid "Change skin"
-msgstr "換膚"
+msgstr "更換主題"
 
 #: ../ui/titlebar.py:149
 msgid "Main menu"
@@ -121,7 +121,7 @@ msgstr "選擇顏色"
 
 #: ../ui/color_selection.py:150
 msgid "Color value"
-msgstr "顏色值"
+msgstr "色彩值"
 
 #: ../ui/color_selection.py:163
 msgid "Red: "
@@ -137,27 +137,27 @@ msgstr "藍色: "
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
-msgstr "選擇皮膚"
+msgstr "選擇主題"
 
 #: ../ui/skin.py:269
 msgid "Skin version mismatch"
-msgstr "皮膚版本不符"
+msgstr "主題版本不符"
 
 #: ../ui/skin.py:270
 msgid "Import skin version is mismatch with current one!"
-msgstr "導入皮膚和當前皮膚版本不符"
+msgstr "導入主題和目前主題版本不符"
 
 #: ../ui/skin.py:302
 msgid "Delete skin"
-msgstr "刪除皮膚"
+msgstr "刪除主題"
 
 #: ../ui/skin.py:303
 msgid "Are you sure you want to delete this skin?"
-msgstr "你確定要刪除當前皮膚？"
+msgstr "你確定要刪除目前的主題？"
 
 #: ../ui/skin.py:740
 msgid "Add skin from file"
-msgstr "添加皮膚檔案"
+msgstr "添加主題檔案"
 
 #: ../ui/skin.py:853
 msgid "Zoom"
@@ -165,11 +165,11 @@ msgstr "縮放"
 
 #: ../ui/skin.py:854
 msgid "Flip vertical"
-msgstr "縱向翻轉"
+msgstr "垂直翻轉"
 
 #: ../ui/skin.py:855
 msgid "Flip horizontal"
-msgstr "橫向翻轉"
+msgstr "水平翻轉"
 
 #: ../ui/skin.py:856
 msgid "Lock scaling"
@@ -177,7 +177,7 @@ msgstr "鎖定縮放比例"
 
 #: ../ui/skin.py:857 ../ui/skin.py:930
 msgid "Export"
-msgstr "導出皮膚"
+msgstr "導出主題"
 
 #: ../ui/skin.py:878
 msgid "Back"
