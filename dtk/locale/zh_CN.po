@@ -1,122 +1,125 @@
-# Chinese translations for PACKAGE package
-# PACKAGE 软件包的简体中文翻译.
-# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2012.
-#
+# 
+# Translators:
+# Automatically generated, 2012
+# iceleaf916 <iceleaf916@gmail.com>, 2013
+# lihongwu <lihongwu1987@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-27 14:28+0800\n"
-"PO-Revision-Date: 2012-07-13 07:14+0800\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: zh_CN\n"
+"POT-Creation-Date: 2013-06-06 10:36+0800\n"
+"PO-Revision-Date: 2013-12-20 03:09+0000\n"
+"Last-Translator: lihongwu <lihongwu1987@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/deepin-ui/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../ui/dialog.py:458 ../ui/dialog.py:547 ../ui/color_selection.py:206
+#: ../ui/dialog.py:416 ../ui/dialog.py:490 ../ui/color_selection.py:206
 #: ../ui/tab_window.py:487
 msgid "OK"
 msgstr "确定"
 
-#: ../ui/dialog.py:459 ../ui/dialog.py:548 ../ui/color_selection.py:207
+#: ../ui/dialog.py:417 ../ui/dialog.py:491 ../ui/color_selection.py:207
 #: ../ui/tab_window.py:488
 msgid "Cancel"
 msgstr "取消"
 
-#: ../ui/dialog.py:709
+#: ../ui/dialog.py:652
 msgid "Preferences"
 msgstr "选项"
 
-#: ../ui/dialog.py:718 ../ui/titlebar.py:174 ../ui/skin.py:130
+#: ../ui/dialog.py:661 ../ui/titlebar.py:167 ../ui/skin.py:130
 #: ../ui/skin.py:152
 msgid "Close"
 msgstr "关闭"
 
 #: ../ui/file_manager.py:44
 msgid "Computer"
-msgstr ""
+msgstr "计算机"
 
 #: ../ui/file_manager.py:45
 msgid "Home"
-msgstr ""
+msgstr "家目录"
 
 #: ../ui/file_manager.py:46
 msgid "Desktop"
-msgstr ""
+msgstr "桌面"
 
 #: ../ui/file_manager.py:47
 msgid "Documents"
-msgstr ""
+msgstr "文档"
 
 #: ../ui/file_manager.py:48
 msgid "Downloads"
-msgstr ""
+msgstr "下载"
 
 #: ../ui/file_manager.py:49
 msgid "Music"
-msgstr ""
+msgstr "音乐"
 
 #: ../ui/file_manager.py:50
 msgid "Pictures"
-msgstr ""
+msgstr "图片"
 
 #: ../ui/file_manager.py:51
 msgid "Videos"
-msgstr ""
+msgstr "视频"
 
 #: ../ui/file_manager.py:52
 msgid "Trash"
-msgstr ""
+msgstr "回收站"
 
 #: ../ui/iconview.py:476
 msgid "Loading..."
 msgstr "加载中..."
 
-#: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
+#: ../ui/entry.py:895 ../ui/net.py:129 ../ui/net.py:708
 msgid "Cut"
 msgstr "剪切"
 
-#: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
+#: ../ui/entry.py:896 ../ui/net.py:130 ../ui/net.py:709
 msgid "Copy"
 msgstr "拷贝"
 
-#: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
+#: ../ui/entry.py:897 ../ui/net.py:131 ../ui/net.py:710
 msgid "Paste"
 msgstr "粘贴"
 
-#: ../ui/entry.py:905
+#: ../ui/entry.py:898
 msgid "Select all"
 msgstr "选择全部"
 
-#: ../ui/entry.py:1956
+#: ../ui/entry.py:1935
 msgid "Please input new shortcuts"
 msgstr "请输入新的快捷键"
 
-#: ../ui/entry.py:1996
+#: ../ui/entry.py:1975
 msgid "Disabled"
 msgstr "禁用"
 
-#: ../ui/titlebar.py:150
+#: ../ui/titlebar.py:143
 msgid "Change skin"
 msgstr "换肤"
 
-#: ../ui/titlebar.py:156
+#: ../ui/titlebar.py:149
 msgid "Main menu"
 msgstr "主菜单"
 
-#: ../ui/titlebar.py:162
+#: ../ui/titlebar.py:155
 msgid "Minimum"
 msgstr "最小化"
 
-#: ../ui/titlebar.py:168
+#: ../ui/titlebar.py:161
 msgid "Maximize"
 msgstr "最大化"
 
-#: ../ui/color_selection.py:111 ../ui/skin.py:869
+#: ../ui/color_selection.py:111 ../ui/skin.py:862
 msgid "Select color"
 msgstr "选择颜色"
 
@@ -136,16 +139,6 @@ msgstr "绿色: "
 msgid "Blue: "
 msgstr "蓝色: "
 
-#: ../ui/gio_utils.py:255
-#, python-format
-msgid "Desktop file not exists: %s"
-msgstr "Desktop文件不存在：%s"
-
-#: ../ui/gio_utils.py:259
-#, python-format
-msgid "Desktop is not valid: %s"
-msgstr "无效的Desktop文件：%s"
-
 #: ../ui/skin.py:125
 msgid "Select Skin"
 msgstr "选择皮肤"
@@ -158,39 +151,39 @@ msgstr "皮肤版本不一致"
 msgid "Import skin version is mismatch with current one!"
 msgstr "导入皮肤和当前皮肤版本不一致"
 
-#: ../ui/skin.py:307
+#: ../ui/skin.py:302
 msgid "Delete skin"
 msgstr "删除皮肤"
 
-#: ../ui/skin.py:308
+#: ../ui/skin.py:303
 msgid "Are you sure you want to delete this skin?"
 msgstr "你确定要删除当前皮肤？"
 
-#: ../ui/skin.py:747
+#: ../ui/skin.py:740
 msgid "Add skin from file"
 msgstr "添加皮肤文件"
 
-#: ../ui/skin.py:860
+#: ../ui/skin.py:853
 msgid "Zoom"
 msgstr "缩放"
 
-#: ../ui/skin.py:861
+#: ../ui/skin.py:854
 msgid "Flip vertical"
 msgstr "纵向翻转"
 
-#: ../ui/skin.py:862
+#: ../ui/skin.py:855
 msgid "Flip horizontal"
 msgstr "横向翻转"
 
-#: ../ui/skin.py:863
+#: ../ui/skin.py:856
 msgid "Lock scaling"
 msgstr "锁定缩放比例"
 
-#: ../ui/skin.py:864 ../ui/skin.py:937
+#: ../ui/skin.py:857 ../ui/skin.py:930
 msgid "Export"
 msgstr "导出皮肤"
 
-#: ../ui/skin.py:885
+#: ../ui/skin.py:878
 msgid "Back"
 msgstr "返回"
 

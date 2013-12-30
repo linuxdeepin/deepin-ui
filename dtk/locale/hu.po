@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# gamjachib <drios9420@gmail.com>, 2013
+# gerst <gerstmajer@gmail.com>, 2013
+# gerst <gerstmajer@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-06 10:36+0800\n"
-"PO-Revision-Date: 2013-12-11 03:27+0000\n"
-"Last-Translator: gamjachib <drios9420@gmail.com>\n"
-"Language-Team: Spanish (Spain) (http://www.transifex.com/projects/p/deepin-ui/language/es_ES/)\n"
+"PO-Revision-Date: 2013-12-25 22:03+0000\n"
+"Last-Translator: gerst <gerstmajer@gmail.com>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/deepin-ui/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
+"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../ui/dialog.py:416 ../ui/dialog.py:490 ../ui/color_selection.py:206
@@ -26,169 +27,169 @@ msgstr "OK"
 #: ../ui/dialog.py:417 ../ui/dialog.py:491 ../ui/color_selection.py:207
 #: ../ui/tab_window.py:488
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Mégsem"
 
 #: ../ui/dialog.py:652
 msgid "Preferences"
-msgstr "Configuración"
+msgstr "Beállítások"
 
 #: ../ui/dialog.py:661 ../ui/titlebar.py:167 ../ui/skin.py:130
 #: ../ui/skin.py:152
 msgid "Close"
-msgstr "Cerrar"
+msgstr "Bezárás"
 
 #: ../ui/file_manager.py:44
 msgid "Computer"
-msgstr "Sistema"
+msgstr "Számítógép"
 
 #: ../ui/file_manager.py:45
 msgid "Home"
-msgstr "Personal"
+msgstr "Home"
 
 #: ../ui/file_manager.py:46
 msgid "Desktop"
-msgstr "Escritorio"
+msgstr "Asztal"
 
 #: ../ui/file_manager.py:47
 msgid "Documents"
-msgstr "Documentos"
+msgstr "Dokumentumok"
 
 #: ../ui/file_manager.py:48
 msgid "Downloads"
-msgstr "Descargas"
+msgstr "Letöltések"
 
 #: ../ui/file_manager.py:49
 msgid "Music"
-msgstr "Música"
+msgstr "Zene"
 
 #: ../ui/file_manager.py:50
 msgid "Pictures"
-msgstr "Imágenes"
+msgstr "Képek"
 
 #: ../ui/file_manager.py:51
 msgid "Videos"
-msgstr "Vídeos"
+msgstr "Videók"
 
 #: ../ui/file_manager.py:52
 msgid "Trash"
-msgstr "Papelera"
+msgstr "Szemetesláda"
 
 #: ../ui/iconview.py:476
 msgid "Loading..."
-msgstr "Cargando..."
+msgstr "Betöltés"
 
 #: ../ui/entry.py:895 ../ui/net.py:129 ../ui/net.py:708
 msgid "Cut"
-msgstr "Cortar"
+msgstr "Kivágás"
 
 #: ../ui/entry.py:896 ../ui/net.py:130 ../ui/net.py:709
 msgid "Copy"
-msgstr "Copiar"
+msgstr "Másolás"
 
 #: ../ui/entry.py:897 ../ui/net.py:131 ../ui/net.py:710
 msgid "Paste"
-msgstr "Pegar"
+msgstr "Beillesztés"
 
 #: ../ui/entry.py:898
 msgid "Select all"
-msgstr "Seleccionar todo"
+msgstr "Összes kijelölése"
 
 #: ../ui/entry.py:1935
 msgid "Please input new shortcuts"
-msgstr "Introduce nuevo atajo"
+msgstr "Új hivatkozás megadása"
 
 #: ../ui/entry.py:1975
 msgid "Disabled"
-msgstr "Desactivado"
+msgstr "letilt"
 
 #: ../ui/titlebar.py:143
 msgid "Change skin"
-msgstr "Apariencia"
+msgstr "Téma cseréje"
 
 #: ../ui/titlebar.py:149
 msgid "Main menu"
-msgstr "Comenzar"
+msgstr "Fő menü"
 
 #: ../ui/titlebar.py:155
 msgid "Minimum"
-msgstr "Minimizar"
+msgstr "Minimalizálás"
 
 #: ../ui/titlebar.py:161
 msgid "Maximize"
-msgstr "Maximizar"
+msgstr "Maximalizálás"
 
 #: ../ui/color_selection.py:111 ../ui/skin.py:862
 msgid "Select color"
-msgstr "Escoge color"
+msgstr "Szín kiválasztása"
 
 #: ../ui/color_selection.py:150
 msgid "Color value"
-msgstr "Código color"
+msgstr "Szín értéke"
 
 #: ../ui/color_selection.py:163
 msgid "Red: "
-msgstr "Rojo: "
+msgstr "Piros"
 
 #: ../ui/color_selection.py:170
 msgid "Green: "
-msgstr "Verde: "
+msgstr "Zöld"
 
 #: ../ui/color_selection.py:177
 msgid "Blue: "
-msgstr "Azul: "
+msgstr "Kék"
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
-msgstr "Apariencia"
+msgstr "Téma kiválasztása"
 
 #: ../ui/skin.py:269
 msgid "Skin version mismatch"
-msgstr "Conflicto de vesiones"
+msgstr "Téma verziószáma nem egyezik"
 
 #: ../ui/skin.py:270
 msgid "Import skin version is mismatch with current one!"
-msgstr "¡El archivo entra en conflicto con el actual!"
+msgstr "Importált téma verziószáma nem egyezik a meglévővel"
 
 #: ../ui/skin.py:302
 msgid "Delete skin"
-msgstr "Borrar decorado"
+msgstr "Téma törlése"
 
 #: ../ui/skin.py:303
 msgid "Are you sure you want to delete this skin?"
-msgstr "¿Está seguro de querer borrar este decorado?"
+msgstr "Biztosan törölni szeretné az adott témát?"
 
 #: ../ui/skin.py:740
 msgid "Add skin from file"
-msgstr "Añadir decorado desde archivo"
+msgstr "Téma hozzáadása fileból"
 
 #: ../ui/skin.py:853
 msgid "Zoom"
-msgstr "Ampliar"
+msgstr "Nagyítás"
 
 #: ../ui/skin.py:854
 msgid "Flip vertical"
-msgstr "Giro vertical"
+msgstr "Függőleges tükrözés"
 
 #: ../ui/skin.py:855
 msgid "Flip horizontal"
-msgstr "Giro horizontal"
+msgstr "Vízszintes tükrözés"
 
 #: ../ui/skin.py:856
 msgid "Lock scaling"
-msgstr "Proporcionado"
+msgstr "Skálázás zárolása"
 
 #: ../ui/skin.py:857 ../ui/skin.py:930
 msgid "Export"
-msgstr "Exportar"
+msgstr "Exportálás"
 
 #: ../ui/skin.py:878
 msgid "Back"
-msgstr "Atrás"
+msgstr "Vissza"
 
 #: ../ui/resizable_label.py:87
 msgid "Expand"
-msgstr "Expandir"
+msgstr "Kiterjeszt"
 
 #: ../ui/resizable_label.py:88
 msgid "Shrink"
-msgstr "Estirar"
+msgstr "Zsugorítás"

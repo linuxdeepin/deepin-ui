@@ -1,39 +1,38 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # 648trindade <rafaelgt.mbin@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-27 14:28+0800\n"
+"POT-Creation-Date: 2013-06-06 10:36+0800\n"
 "PO-Revision-Date: 2013-12-11 05:38+0000\n"
 "Last-Translator: 648trindade <rafaelgt.mbin@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
-"deepin-ui/language/pt_BR/)\n"
-"Language: pt_BR\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/deepin-ui/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../ui/dialog.py:458 ../ui/dialog.py:547 ../ui/color_selection.py:206
+#: ../ui/dialog.py:416 ../ui/dialog.py:490 ../ui/color_selection.py:206
 #: ../ui/tab_window.py:487
 msgid "OK"
 msgstr "OK"
 
-#: ../ui/dialog.py:459 ../ui/dialog.py:548 ../ui/color_selection.py:207
+#: ../ui/dialog.py:417 ../ui/dialog.py:491 ../ui/color_selection.py:207
 #: ../ui/tab_window.py:488
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../ui/dialog.py:709
+#: ../ui/dialog.py:652
 msgid "Preferences"
 msgstr "Preferências"
 
-#: ../ui/dialog.py:718 ../ui/titlebar.py:174 ../ui/skin.py:130
+#: ../ui/dialog.py:661 ../ui/titlebar.py:167 ../ui/skin.py:130
 #: ../ui/skin.py:152
 msgid "Close"
 msgstr "Fechar"
@@ -78,47 +77,47 @@ msgstr "Lixeira"
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
+#: ../ui/entry.py:895 ../ui/net.py:129 ../ui/net.py:708
 msgid "Cut"
 msgstr "Recortar"
 
-#: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
+#: ../ui/entry.py:896 ../ui/net.py:130 ../ui/net.py:709
 msgid "Copy"
 msgstr "Copiar"
 
-#: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
+#: ../ui/entry.py:897 ../ui/net.py:131 ../ui/net.py:710
 msgid "Paste"
 msgstr "Colar"
 
-#: ../ui/entry.py:905
+#: ../ui/entry.py:898
 msgid "Select all"
 msgstr "Selecionar tudo"
 
-#: ../ui/entry.py:1956
+#: ../ui/entry.py:1935
 msgid "Please input new shortcuts"
 msgstr "Por favor insira novos atalhos"
 
-#: ../ui/entry.py:1996
+#: ../ui/entry.py:1975
 msgid "Disabled"
 msgstr "Desativado"
 
-#: ../ui/titlebar.py:150
+#: ../ui/titlebar.py:143
 msgid "Change skin"
 msgstr "Trocar skin"
 
-#: ../ui/titlebar.py:156
+#: ../ui/titlebar.py:149
 msgid "Main menu"
 msgstr "Menu principal"
 
-#: ../ui/titlebar.py:162
+#: ../ui/titlebar.py:155
 msgid "Minimum"
 msgstr "Minimizar"
 
-#: ../ui/titlebar.py:168
+#: ../ui/titlebar.py:161
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: ../ui/color_selection.py:111 ../ui/skin.py:869
+#: ../ui/color_selection.py:111 ../ui/skin.py:862
 msgid "Select color"
 msgstr "Selecionar cor"
 
@@ -138,16 +137,6 @@ msgstr "Verde:"
 msgid "Blue: "
 msgstr "Azul:"
 
-#: ../ui/gio_utils.py:255
-#, python-format
-msgid "Desktop file not exists: %s"
-msgstr ""
-
-#: ../ui/gio_utils.py:259
-#, python-format
-msgid "Desktop is not valid: %s"
-msgstr ""
-
 #: ../ui/skin.py:125
 msgid "Select Skin"
 msgstr "Selecionar Skin"
@@ -160,39 +149,39 @@ msgstr "Versão da skin incompatível"
 msgid "Import skin version is mismatch with current one!"
 msgstr "Importar versão de skin com atual"
 
-#: ../ui/skin.py:307
+#: ../ui/skin.py:302
 msgid "Delete skin"
 msgstr "Excluir skin"
 
-#: ../ui/skin.py:308
+#: ../ui/skin.py:303
 msgid "Are you sure you want to delete this skin?"
 msgstr "Tem certeza que quer excluir a skin?"
 
-#: ../ui/skin.py:747
+#: ../ui/skin.py:740
 msgid "Add skin from file"
 msgstr "Adicionar skin de arquivo"
 
-#: ../ui/skin.py:860
+#: ../ui/skin.py:853
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../ui/skin.py:861
+#: ../ui/skin.py:854
 msgid "Flip vertical"
 msgstr "Flip vertical"
 
-#: ../ui/skin.py:862
+#: ../ui/skin.py:855
 msgid "Flip horizontal"
 msgstr "Flip horizontal"
 
-#: ../ui/skin.py:863
+#: ../ui/skin.py:856
 msgid "Lock scaling"
 msgstr "Dimensionamento de trava"
 
-#: ../ui/skin.py:864 ../ui/skin.py:937
+#: ../ui/skin.py:857 ../ui/skin.py:930
 msgid "Export"
 msgstr "Exportar"
 
-#: ../ui/skin.py:885
+#: ../ui/skin.py:878
 msgid "Back"
 msgstr "Voltar"
 
