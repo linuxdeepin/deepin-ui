@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-27 14:28+0800\n"
+"POT-Creation-Date: 2014-01-02 17:08+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,66 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui/dialog.py:458 ../ui/dialog.py:547 ../ui/color_selection.py:206
+#: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
+msgid "Cut"
+msgstr ""
+
+#: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
+msgid "Copy"
+msgstr ""
+
+#: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
+msgid "Paste"
+msgstr ""
+
+#: ../ui/entry.py:905
+msgid "Select all"
+msgstr ""
+
+#: ../ui/entry.py:1956
+msgid "Please input new shortcuts"
+msgstr ""
+
+#: ../ui/entry.py:1996
+msgid "Disabled"
+msgstr ""
+
+#: ../ui/color_selection.py:111 ../ui/skin.py:869
+msgid "Select color"
+msgstr ""
+
+#: ../ui/color_selection.py:150
+msgid "Color value"
+msgstr ""
+
+#: ../ui/color_selection.py:163
+msgid "Red: "
+msgstr ""
+
+#: ../ui/color_selection.py:170
+msgid "Green: "
+msgstr ""
+
+#: ../ui/color_selection.py:177
+msgid "Blue: "
+msgstr ""
+
+#: ../ui/color_selection.py:206 ../ui/dialog.py:458 ../ui/dialog.py:547
 #: ../ui/tab_window.py:487
 msgid "OK"
 msgstr ""
 
-#: ../ui/dialog.py:459 ../ui/dialog.py:548 ../ui/color_selection.py:207
+#: ../ui/color_selection.py:207 ../ui/dialog.py:459 ../ui/dialog.py:548
 #: ../ui/tab_window.py:488
 msgid "Cancel"
 msgstr ""
 
-#: ../ui/dialog.py:709
-msgid "Preferences"
+#: ../ui/resizable_label.py:87
+msgid "Expand"
 msgstr ""
 
-#: ../ui/dialog.py:718 ../ui/titlebar.py:174 ../ui/skin.py:130
-#: ../ui/skin.py:152
-msgid "Close"
+#: ../ui/resizable_label.py:88
+msgid "Shrink"
 msgstr ""
 
 #: ../ui/file_manager.py:44
@@ -72,34 +115,6 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#: ../ui/iconview.py:476
-msgid "Loading..."
-msgstr ""
-
-#: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
-msgid "Cut"
-msgstr ""
-
-#: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
-msgid "Copy"
-msgstr ""
-
-#: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
-msgid "Paste"
-msgstr ""
-
-#: ../ui/entry.py:905
-msgid "Select all"
-msgstr ""
-
-#: ../ui/entry.py:1956
-msgid "Please input new shortcuts"
-msgstr ""
-
-#: ../ui/entry.py:1996
-msgid "Disabled"
-msgstr ""
-
 #: ../ui/titlebar.py:150
 msgid "Change skin"
 msgstr ""
@@ -116,24 +131,17 @@ msgstr ""
 msgid "Maximize"
 msgstr ""
 
-#: ../ui/color_selection.py:111 ../ui/skin.py:869
-msgid "Select color"
+#: ../ui/titlebar.py:174 ../ui/dialog.py:718 ../ui/skin.py:130
+#: ../ui/skin.py:152
+msgid "Close"
 msgstr ""
 
-#: ../ui/color_selection.py:150
-msgid "Color value"
+#: ../ui/dialog.py:709
+msgid "Preferences"
 msgstr ""
 
-#: ../ui/color_selection.py:163
-msgid "Red: "
-msgstr ""
-
-#: ../ui/color_selection.py:170
-msgid "Green: "
-msgstr ""
-
-#: ../ui/color_selection.py:177
-msgid "Blue: "
+#: ../ui/iconview.py:476
+msgid "Loading..."
 msgstr ""
 
 #: ../ui/gio_utils.py:255
@@ -192,12 +200,4 @@ msgstr ""
 
 #: ../ui/skin.py:885
 msgid "Back"
-msgstr ""
-
-#: ../ui/resizable_label.py:87
-msgid "Expand"
-msgstr ""
-
-#: ../ui/resizable_label.py:88
-msgid "Shrink"
 msgstr ""

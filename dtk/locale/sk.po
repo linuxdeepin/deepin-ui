@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# gamjachib <drios9420@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
@@ -11,140 +10,140 @@ msgstr ""
 "POT-Creation-Date: 2014-01-02 17:08+0800\n"
 "PO-Revision-Date: 2014-01-02 02:15+0000\n"
 "Last-Translator: electricface <songwentai@linuxdeepin.com>\n"
-"Language-Team: Spanish (Chile) (http://www.transifex.com/projects/p/deepin-"
-"ui/language/es_CL/)\n"
-"Language: es_CL\n"
+"Language-Team: Slovak (http://www.transifex.com/projects/p/deepin-ui/"
+"language/sk/)\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
 msgid "Cut"
-msgstr "Cortar"
+msgstr ""
 
 #: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
 msgid "Copy"
-msgstr "Copiar"
+msgstr ""
 
 #: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
 msgid "Paste"
-msgstr "Pegar"
+msgstr ""
 
 #: ../ui/entry.py:905
 msgid "Select all"
-msgstr "Seleccionar todo"
+msgstr ""
 
 #: ../ui/entry.py:1956
 msgid "Please input new shortcuts"
-msgstr "Por favor ingrese el nuevo acceso rápido"
+msgstr ""
 
 #: ../ui/entry.py:1996
 msgid "Disabled"
-msgstr "Deshabilitado"
+msgstr ""
 
 #: ../ui/color_selection.py:111 ../ui/skin.py:869
 msgid "Select color"
-msgstr "Elegir color"
+msgstr ""
 
 #: ../ui/color_selection.py:150
 msgid "Color value"
-msgstr "Valor de color"
+msgstr ""
 
 #: ../ui/color_selection.py:163
 msgid "Red: "
-msgstr "Rojo:"
+msgstr ""
 
 #: ../ui/color_selection.py:170
 msgid "Green: "
-msgstr "Verde:"
+msgstr ""
 
 #: ../ui/color_selection.py:177
 msgid "Blue: "
-msgstr "Azul:"
+msgstr ""
 
 #: ../ui/color_selection.py:206 ../ui/dialog.py:458 ../ui/dialog.py:547
 #: ../ui/tab_window.py:487
 msgid "OK"
-msgstr "Aceptar"
+msgstr ""
 
 #: ../ui/color_selection.py:207 ../ui/dialog.py:459 ../ui/dialog.py:548
 #: ../ui/tab_window.py:488
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #: ../ui/resizable_label.py:87
 msgid "Expand"
-msgstr "Expandir"
+msgstr ""
 
 #: ../ui/resizable_label.py:88
 msgid "Shrink"
-msgstr "Encoger"
+msgstr ""
 
 #: ../ui/file_manager.py:44
 msgid "Computer"
-msgstr "Sistema"
+msgstr ""
 
 #: ../ui/file_manager.py:45
 msgid "Home"
-msgstr "Principal"
+msgstr ""
 
 #: ../ui/file_manager.py:46
 msgid "Desktop"
-msgstr "Escritorio"
+msgstr ""
 
 #: ../ui/file_manager.py:47
 msgid "Documents"
-msgstr "Documentos"
+msgstr ""
 
 #: ../ui/file_manager.py:48
 msgid "Downloads"
-msgstr "Descargas"
+msgstr ""
 
 #: ../ui/file_manager.py:49
 msgid "Music"
-msgstr "Música"
+msgstr ""
 
 #: ../ui/file_manager.py:50
 msgid "Pictures"
-msgstr "Imágenes"
+msgstr ""
 
 #: ../ui/file_manager.py:51
 msgid "Videos"
-msgstr "Vídeos"
+msgstr ""
 
 #: ../ui/file_manager.py:52
 msgid "Trash"
-msgstr "Papelera"
+msgstr ""
 
 #: ../ui/titlebar.py:150
 msgid "Change skin"
-msgstr "Cambiar tema"
+msgstr ""
 
 #: ../ui/titlebar.py:156
 msgid "Main menu"
-msgstr "Menú principal"
+msgstr ""
 
 #: ../ui/titlebar.py:162
 msgid "Minimum"
-msgstr "Mínimo"
+msgstr ""
 
 #: ../ui/titlebar.py:168
 msgid "Maximize"
-msgstr "Maximizar"
+msgstr ""
 
 #: ../ui/titlebar.py:174 ../ui/dialog.py:718 ../ui/skin.py:130
 #: ../ui/skin.py:152
 msgid "Close"
-msgstr "Cerrar"
+msgstr ""
 
 #: ../ui/dialog.py:709
 msgid "Preferences"
-msgstr "Preferencias"
+msgstr ""
 
 #: ../ui/iconview.py:476
 msgid "Loading..."
-msgstr "Cargando..."
+msgstr ""
 
 #: ../ui/gio_utils.py:255
 #, python-format
@@ -158,48 +157,48 @@ msgstr ""
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
-msgstr "Elegir tema"
+msgstr ""
 
 #: ../ui/skin.py:269
 msgid "Skin version mismatch"
-msgstr "No concuerda la versión del tema"
+msgstr ""
 
 #: ../ui/skin.py:270
 msgid "Import skin version is mismatch with current one!"
-msgstr "¡La versión del tema importado no concuerda con la actual!"
+msgstr ""
 
 #: ../ui/skin.py:307
 msgid "Delete skin"
-msgstr "Eliminar tema"
+msgstr ""
 
 #: ../ui/skin.py:308
 msgid "Are you sure you want to delete this skin?"
-msgstr "¿Estás seguro que quieres eliminar este tema?"
+msgstr ""
 
 #: ../ui/skin.py:747
 msgid "Add skin from file"
-msgstr "Añadir tema desde archivo"
+msgstr ""
 
 #: ../ui/skin.py:860
 msgid "Zoom"
-msgstr "Acercar"
+msgstr ""
 
 #: ../ui/skin.py:861
 msgid "Flip vertical"
-msgstr "Invertir posición vertical"
+msgstr ""
 
 #: ../ui/skin.py:862
 msgid "Flip horizontal"
-msgstr "Invertir posición horizontal"
+msgstr ""
 
 #: ../ui/skin.py:863
 msgid "Lock scaling"
-msgstr "Bloquear relación de aspecto"
+msgstr ""
 
 #: ../ui/skin.py:864 ../ui/skin.py:937
 msgid "Export"
-msgstr "Exportar"
+msgstr ""
 
 #: ../ui/skin.py:885
 msgid "Back"
-msgstr "Atrás"
+msgstr ""
