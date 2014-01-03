@@ -26,7 +26,7 @@ try:
     DESKTOP_SETTINGS = deepin_gsettings.new(DESKTOP_SETTINGS_CONF)
 except ImportError:
     print "----------Please Install Deepin GSettings Python Binding----------"
-    print "sudo apt-get install deepin-gsettings"
+    print "sudo apt-get install python-deepin-gsettings"
     print "------------------------------------------------------------------"
 
 DEFAULT_CURSOR_BLINK_TIME = 600  # microsecond
