@@ -5,13 +5,15 @@
 # Translators:
 # Automatically generated, 2012
 # electricface <songwentai@linuxdeepin.com>, 2014
+# freddy4212 <freddy4212@gmail.com>, 2014
+# PeterDaveHello <hsu@peterdavehello.org>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-02 17:08+0800\n"
-"PO-Revision-Date: 2014-01-02 04:13+0000\n"
-"Last-Translator: electricface <songwentai@linuxdeepin.com>\n"
+"POT-Creation-Date: 2014-02-10 16:52+0800\n"
+"PO-Revision-Date: 2014-01-28 14:31+0000\n"
+"Last-Translator: PeterDaveHello <hsu@peterdavehello.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/deepin-"
 "ui/language/zh_TW/)\n"
 "Language: zh_TW\n"
@@ -34,7 +36,7 @@ msgstr "貼上"
 
 #: ../ui/entry.py:905
 msgid "Select all"
-msgstr "選擇全部"
+msgstr "全部選取"
 
 #: ../ui/entry.py:1956
 msgid "Please input new shortcuts"
@@ -150,12 +152,12 @@ msgstr "載入中..."
 #: ../ui/gio_utils.py:255
 #, python-format
 msgid "Desktop file not exists: %s"
-msgstr "Desktop 文件不存在:  %s"
+msgstr "Desktop 檔案不存在: %s"
 
 #: ../ui/gio_utils.py:259
 #, python-format
 msgid "Desktop is not valid: %s"
-msgstr "無效的 Desktop 文件：%s"
+msgstr "無效的 Desktop 檔案：%s"
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
@@ -167,7 +169,7 @@ msgstr "主題版本不符"
 
 #: ../ui/skin.py:270
 msgid "Import skin version is mismatch with current one!"
-msgstr "導入主題和目前主題版本不符"
+msgstr "匯入的主題和目前主題版本不符"
 
 #: ../ui/skin.py:307
 msgid "Delete skin"
@@ -179,7 +181,7 @@ msgstr "你確定要刪除目前的主題？"
 
 #: ../ui/skin.py:747
 msgid "Add skin from file"
-msgstr "添加主題檔案"
+msgstr "加入主題檔案"
 
 #: ../ui/skin.py:860
 msgid "Zoom"
@@ -199,7 +201,7 @@ msgstr "鎖定縮放比例"
 
 #: ../ui/skin.py:864 ../ui/skin.py:937
 msgid "Export"
-msgstr "導出主題"
+msgstr "匯出主題"
 
 #: ../ui/skin.py:885
 msgid "Back"

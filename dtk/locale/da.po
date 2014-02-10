@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# gamjachib <drios9420@gmail.com>, 2013
+# Snubbi <carl@manjaro.dk>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-10 16:52+0800\n"
-"PO-Revision-Date: 2014-01-02 02:15+0000\n"
-"Last-Translator: electricface <songwentai@linuxdeepin.com>\n"
-"Language-Team: Spanish (Paraguay) (http://www.transifex.com/projects/p/"
-"deepin-ui/language/es_PY/)\n"
-"Language: es_PY\n"
+"PO-Revision-Date: 2014-01-10 08:12+0000\n"
+"Last-Translator: Snubbi <carl@manjaro.dk>\n"
+"Language-Team: Danish (http://www.transifex.com/projects/p/deepin-ui/"
+"language/da/)\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,47 +21,47 @@ msgstr ""
 
 #: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
 msgid "Cut"
-msgstr "Cortar"
+msgstr "Klip"
 
 #: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
 msgid "Copy"
-msgstr "Copiar"
+msgstr "Kopier"
 
 #: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
 msgid "Paste"
-msgstr "Pegar"
+msgstr "Indsæt"
 
 #: ../ui/entry.py:905
 msgid "Select all"
-msgstr "Seleccionar todo"
+msgstr "Vælg alt"
 
 #: ../ui/entry.py:1956
 msgid "Please input new shortcuts"
-msgstr "Introduce nuevo atajo"
+msgstr "Indtast venligst ny genvej"
 
 #: ../ui/entry.py:1996
 msgid "Disabled"
-msgstr "Desactivado"
+msgstr "Deaktiveret"
 
 #: ../ui/color_selection.py:111 ../ui/skin.py:869
 msgid "Select color"
-msgstr "Escoge color"
+msgstr "Vælg farve"
 
 #: ../ui/color_selection.py:150
 msgid "Color value"
-msgstr "Código color"
+msgstr "Farve værdi"
 
 #: ../ui/color_selection.py:163
 msgid "Red: "
-msgstr "Rojo: "
+msgstr "Rød:"
 
 #: ../ui/color_selection.py:170
 msgid "Green: "
-msgstr "Verde: "
+msgstr "Grøn:"
 
 #: ../ui/color_selection.py:177
 msgid "Blue: "
-msgstr "Azul: "
+msgstr "Blå:"
 
 #: ../ui/color_selection.py:206 ../ui/dialog.py:458 ../ui/dialog.py:547
 #: ../ui/tab_window.py:487
@@ -71,135 +71,135 @@ msgstr "OK"
 #: ../ui/color_selection.py:207 ../ui/dialog.py:459 ../ui/dialog.py:548
 #: ../ui/tab_window.py:488
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Annuller"
 
 #: ../ui/resizable_label.py:87
 msgid "Expand"
-msgstr "Expandir"
+msgstr "Udvid"
 
 #: ../ui/resizable_label.py:88
 msgid "Shrink"
-msgstr "Estirar"
+msgstr "Formindsk"
 
 #: ../ui/file_manager.py:44
 msgid "Computer"
-msgstr "Sistema"
+msgstr "Komputer"
 
 #: ../ui/file_manager.py:45
 msgid "Home"
-msgstr "Personal"
+msgstr "Hjem"
 
 #: ../ui/file_manager.py:46
 msgid "Desktop"
-msgstr "Escritorio"
+msgstr "Desktop"
 
 #: ../ui/file_manager.py:47
 msgid "Documents"
-msgstr "Documentos"
+msgstr "Dokumenter"
 
 #: ../ui/file_manager.py:48
 msgid "Downloads"
-msgstr "Descargas"
+msgstr "Downloads"
 
 #: ../ui/file_manager.py:49
 msgid "Music"
-msgstr "Música"
+msgstr "Musik"
 
 #: ../ui/file_manager.py:50
 msgid "Pictures"
-msgstr "Imágenes"
+msgstr "Billeder"
 
 #: ../ui/file_manager.py:51
 msgid "Videos"
-msgstr "Vídeos"
+msgstr "Videoer"
 
 #: ../ui/file_manager.py:52
 msgid "Trash"
-msgstr "Papelera"
+msgstr "Papirkurv"
 
 #: ../ui/titlebar.py:150
 msgid "Change skin"
-msgstr "Apariencia"
+msgstr "Ændr udseende"
 
 #: ../ui/titlebar.py:156
 msgid "Main menu"
-msgstr "Comenzar"
+msgstr "Hovedmenu"
 
 #: ../ui/titlebar.py:162
 msgid "Minimum"
-msgstr "Minimizar"
+msgstr "Minimum"
 
 #: ../ui/titlebar.py:168
 msgid "Maximize"
-msgstr "Maximizar"
+msgstr "Maksimere"
 
 #: ../ui/titlebar.py:174 ../ui/dialog.py:718 ../ui/skin.py:130
 #: ../ui/skin.py:152
 msgid "Close"
-msgstr "Cerrar"
+msgstr "Luk"
 
 #: ../ui/dialog.py:709
 msgid "Preferences"
-msgstr "Configuración"
+msgstr "Præferencer"
 
 #: ../ui/iconview.py:476
 msgid "Loading..."
-msgstr "Cargando..."
+msgstr "Loader..."
 
 #: ../ui/gio_utils.py:255
 #, python-format
 msgid "Desktop file not exists: %s"
-msgstr ""
+msgstr "Skrivebordsfil eksisterer ikke: %s"
 
 #: ../ui/gio_utils.py:259
 #, python-format
 msgid "Desktop is not valid: %s"
-msgstr ""
+msgstr "Skrivebord er ikke gældende: %s"
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
-msgstr "Apariencia"
+msgstr "Vælg tema"
 
 #: ../ui/skin.py:269
 msgid "Skin version mismatch"
-msgstr "Conflicto de vesiones"
+msgstr "Tema versionsfejlmatch"
 
 #: ../ui/skin.py:270
 msgid "Import skin version is mismatch with current one!"
-msgstr "¡El archivo entra en conflicto con el actual!"
+msgstr "Importeret temaversion er fejlmatch med det aktuelle!"
 
 #: ../ui/skin.py:307
 msgid "Delete skin"
-msgstr "Borrar decorado"
+msgstr "Slet tema"
 
 #: ../ui/skin.py:308
 msgid "Are you sure you want to delete this skin?"
-msgstr "¿Está seguro de querer borrar este decorado?"
+msgstr "Er du sikker på at du ønsker at slette dette tema?"
 
 #: ../ui/skin.py:747
 msgid "Add skin from file"
-msgstr "Añadir decorado desde archivo"
+msgstr "Tilføj tema fra fil"
 
 #: ../ui/skin.py:860
 msgid "Zoom"
-msgstr "Ampliar"
+msgstr "Zoom "
 
 #: ../ui/skin.py:861
 msgid "Flip vertical"
-msgstr "Giro vertical"
+msgstr "Vend lodret"
 
 #: ../ui/skin.py:862
 msgid "Flip horizontal"
-msgstr "Giro horizontal"
+msgstr "Vend vandret"
 
 #: ../ui/skin.py:863
 msgid "Lock scaling"
-msgstr "Proporcionado"
+msgstr "Lås skalering"
 
 #: ../ui/skin.py:864 ../ui/skin.py:937
 msgid "Export"
-msgstr "Exportar"
+msgstr "Eksporter"
 
 #: ../ui/skin.py:885
 msgid "Back"
-msgstr "Atrás"
+msgstr "Tilbage"

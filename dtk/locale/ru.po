@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# evilscorpio <scorpkillerx@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-02 17:08+0800\n"
-"PO-Revision-Date: 2014-01-02 02:15+0000\n"
-"Last-Translator: electricface <songwentai@linuxdeepin.com>\n"
+"POT-Creation-Date: 2014-02-10 16:52+0800\n"
+"PO-Revision-Date: 2014-01-23 11:50+0000\n"
+"Last-Translator: evilscorpio <scorpkillerx@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/deepin-ui/"
 "language/ru/)\n"
 "Language: ru\n"
@@ -21,185 +22,185 @@ msgstr ""
 
 #: ../ui/entry.py:902 ../ui/net.py:130 ../ui/net.py:716
 msgid "Cut"
-msgstr ""
+msgstr "Вырезать"
 
 #: ../ui/entry.py:903 ../ui/net.py:131 ../ui/net.py:717
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: ../ui/entry.py:904 ../ui/net.py:132 ../ui/net.py:718
 msgid "Paste"
-msgstr ""
+msgstr "Вставить"
 
 #: ../ui/entry.py:905
 msgid "Select all"
-msgstr ""
+msgstr "Выбрать все"
 
 #: ../ui/entry.py:1956
 msgid "Please input new shortcuts"
-msgstr ""
+msgstr "Пожалуйста введите новые ярлыки"
 
 #: ../ui/entry.py:1996
 msgid "Disabled"
-msgstr ""
+msgstr "Отключено"
 
 #: ../ui/color_selection.py:111 ../ui/skin.py:869
 msgid "Select color"
-msgstr ""
+msgstr "Выбрать цвет"
 
 #: ../ui/color_selection.py:150
 msgid "Color value"
-msgstr ""
+msgstr "Уровень цвета:"
 
 #: ../ui/color_selection.py:163
 msgid "Red: "
-msgstr ""
+msgstr "Красный:"
 
 #: ../ui/color_selection.py:170
 msgid "Green: "
-msgstr ""
+msgstr "Зеленый:"
 
 #: ../ui/color_selection.py:177
 msgid "Blue: "
-msgstr ""
+msgstr "Синий:"
 
 #: ../ui/color_selection.py:206 ../ui/dialog.py:458 ../ui/dialog.py:547
 #: ../ui/tab_window.py:487
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 #: ../ui/color_selection.py:207 ../ui/dialog.py:459 ../ui/dialog.py:548
 #: ../ui/tab_window.py:488
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: ../ui/resizable_label.py:87
 msgid "Expand"
-msgstr ""
+msgstr "Расширить"
 
 #: ../ui/resizable_label.py:88
 msgid "Shrink"
-msgstr ""
+msgstr "Сжать"
 
 #: ../ui/file_manager.py:44
 msgid "Computer"
-msgstr ""
+msgstr "Компьютер"
 
 #: ../ui/file_manager.py:45
 msgid "Home"
-msgstr ""
+msgstr "Домашняя папка"
 
 #: ../ui/file_manager.py:46
 msgid "Desktop"
-msgstr ""
+msgstr "Рабочий стол"
 
 #: ../ui/file_manager.py:47
 msgid "Documents"
-msgstr ""
+msgstr "Документы"
 
 #: ../ui/file_manager.py:48
 msgid "Downloads"
-msgstr ""
+msgstr "Загрузки"
 
 #: ../ui/file_manager.py:49
 msgid "Music"
-msgstr ""
+msgstr "Музыка"
 
 #: ../ui/file_manager.py:50
 msgid "Pictures"
-msgstr ""
+msgstr "Изображения"
 
 #: ../ui/file_manager.py:51
 msgid "Videos"
-msgstr ""
+msgstr "Видео"
 
 #: ../ui/file_manager.py:52
 msgid "Trash"
-msgstr ""
+msgstr "Корзина"
 
 #: ../ui/titlebar.py:150
 msgid "Change skin"
-msgstr ""
+msgstr "Сменить тему оформления"
 
 #: ../ui/titlebar.py:156
 msgid "Main menu"
-msgstr ""
+msgstr "Главное меню"
 
 #: ../ui/titlebar.py:162
 msgid "Minimum"
-msgstr ""
+msgstr "Свернуть"
 
 #: ../ui/titlebar.py:168
 msgid "Maximize"
-msgstr ""
+msgstr "Развернуть"
 
 #: ../ui/titlebar.py:174 ../ui/dialog.py:718 ../ui/skin.py:130
 #: ../ui/skin.py:152
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 #: ../ui/dialog.py:709
 msgid "Preferences"
-msgstr ""
+msgstr "Параметры"
 
 #: ../ui/iconview.py:476
 msgid "Loading..."
-msgstr ""
+msgstr "Загрузка..."
 
 #: ../ui/gio_utils.py:255
 #, python-format
 msgid "Desktop file not exists: %s"
-msgstr ""
+msgstr "Файл рабочего стола не существует: %s"
 
 #: ../ui/gio_utils.py:259
 #, python-format
 msgid "Desktop is not valid: %s"
-msgstr ""
+msgstr "Рабочий стол содержит ошибку: %s"
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
-msgstr ""
+msgstr "Выбрать тему оформления"
 
 #: ../ui/skin.py:269
 msgid "Skin version mismatch"
-msgstr ""
+msgstr "Несовпадение версий тем оформления"
 
 #: ../ui/skin.py:270
 msgid "Import skin version is mismatch with current one!"
-msgstr ""
+msgstr "Версия импортированной темы оформления не совпадает с текущей!"
 
 #: ../ui/skin.py:307
 msgid "Delete skin"
-msgstr ""
+msgstr "Удалить тему оформления"
 
 #: ../ui/skin.py:308
 msgid "Are you sure you want to delete this skin?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить эту тему оформления?"
 
 #: ../ui/skin.py:747
 msgid "Add skin from file"
-msgstr ""
+msgstr "Добавить тему оформления из файла"
 
 #: ../ui/skin.py:860
 msgid "Zoom"
-msgstr ""
+msgstr "Приблизить"
 
 #: ../ui/skin.py:861
 msgid "Flip vertical"
-msgstr ""
+msgstr "Отразить по вертикали"
 
 #: ../ui/skin.py:862
 msgid "Flip horizontal"
-msgstr ""
+msgstr "Отразить по горизонтали"
 
 #: ../ui/skin.py:863
 msgid "Lock scaling"
-msgstr ""
+msgstr "Заблокировать масштабирование"
 
 #: ../ui/skin.py:864 ../ui/skin.py:937
 msgid "Export"
-msgstr ""
+msgstr "Экспортировать"
 
 #: ../ui/skin.py:885
 msgid "Back"
-msgstr ""
+msgstr "Назад"

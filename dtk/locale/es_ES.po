@@ -3,14 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# toolband25 <castilloluis2005@gmail.com>, 2014
 # gamjachib <drios9420@gmail.com>, 2013
+# toolband25 <castilloluis2005@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-02 17:08+0800\n"
-"PO-Revision-Date: 2014-01-02 02:15+0000\n"
-"Last-Translator: electricface <songwentai@linuxdeepin.com>\n"
+"POT-Creation-Date: 2014-02-10 16:52+0800\n"
+"PO-Revision-Date: 2014-01-27 18:33+0000\n"
+"Last-Translator: toolband25 <castilloluis2005@gmail.com>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/projects/p/deepin-"
 "ui/language/es_ES/)\n"
 "Language: es_ES\n"
@@ -45,7 +47,7 @@ msgstr "Desactivado"
 
 #: ../ui/color_selection.py:111 ../ui/skin.py:869
 msgid "Select color"
-msgstr "Escoge color"
+msgstr "Seleccionar color"
 
 #: ../ui/color_selection.py:150
 msgid "Color value"
@@ -79,7 +81,7 @@ msgstr "Expandir"
 
 #: ../ui/resizable_label.py:88
 msgid "Shrink"
-msgstr "Estirar"
+msgstr "Encoger"
 
 #: ../ui/file_manager.py:44
 msgid "Computer"
@@ -87,7 +89,7 @@ msgstr "Sistema"
 
 #: ../ui/file_manager.py:45
 msgid "Home"
-msgstr "Personal"
+msgstr "Carpeta Personal"
 
 #: ../ui/file_manager.py:46
 msgid "Desktop"
@@ -140,7 +142,7 @@ msgstr "Cerrar"
 
 #: ../ui/dialog.py:709
 msgid "Preferences"
-msgstr "Configuración"
+msgstr "Preferencias"
 
 #: ../ui/iconview.py:476
 msgid "Loading..."
@@ -149,16 +151,16 @@ msgstr "Cargando..."
 #: ../ui/gio_utils.py:255
 #, python-format
 msgid "Desktop file not exists: %s"
-msgstr ""
+msgstr "Archivo no existe: %s"
 
 #: ../ui/gio_utils.py:259
 #, python-format
 msgid "Desktop is not valid: %s"
-msgstr ""
+msgstr "Escritorio no valido: %s"
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
-msgstr "Apariencia"
+msgstr "Seleccionar Decorado"
 
 #: ../ui/skin.py:269
 msgid "Skin version mismatch"
