@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# 648trindade <rafaelgt.mbin@gmail.com>, 2014
 # 648trindade <rafaelgt.mbin@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Deepin UI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-10 16:52+0800\n"
-"PO-Revision-Date: 2014-01-02 02:15+0000\n"
-"Last-Translator: electricface <songwentai@linuxdeepin.com>\n"
+"POT-Creation-Date: 2014-02-25 14:42+0800\n"
+"PO-Revision-Date: 2014-02-23 20:25+0000\n"
+"Last-Translator: 648trindade <rafaelgt.mbin@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "deepin-ui/language/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -149,12 +150,12 @@ msgstr "Carregando..."
 #: ../ui/gio_utils.py:255
 #, python-format
 msgid "Desktop file not exists: %s"
-msgstr ""
+msgstr "Arquivo de desktop não existe: %s"
 
 #: ../ui/gio_utils.py:259
 #, python-format
 msgid "Desktop is not valid: %s"
-msgstr ""
+msgstr "Desktop não é valido: %s"
 
 #: ../ui/skin.py:125
 msgid "Select Skin"
